@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v1.0.3 - Tue Apr 08 2025
+ * TradingVue.JS - v1.0.3 - Mon Aug 18 2025
  *     https://github.com/tvjsx/trading-vue-js
  *     Copyright (c) 2019 C451 Code's All Right;
  *     Licensed under the MIT license
@@ -275,412 +275,6 @@ IndexedArray.prototype.getRange = function (begin, end) {
     return this.data.slice(start, finish + 1);
 };
 
-
-/***/ }),
-
-/***/ 874:
-/***/ ((module) => {
-
-/**
- * Binary search implementation
- */
-
-/**
- * Main search recursive function
- */
-function loop(data, min, max, index, valpos) {
-
-    // set current position as the middle point between min and max
-    var curr = (max + min) >>> 1;
-
-    // compare current index value with the one we are looking for
-    var diff = this.compare(data[curr][this.index], index);
-
-    // found?
-    if (!diff) {
-        return valpos[index] = {
-            "found": true,
-            "index": curr,
-            "prev": null,
-            "next": null
-        };
-    }
-
-    // no more positions available?
-    if (min >= max) {
-        return valpos[index] = {
-            "found": false,
-            "index": null,
-            "prev": (diff < 0) ? max : max - 1,
-            "next": (diff < 0) ? max + 1 : max
-        };
-    }
-
-    // continue looking for index in one of the remaining array halves
-    // current position can be skept as index is not there...
-    if (diff > 0)
-        return loop.call(this, data, min, curr - 1, index, valpos);
-    else
-        return loop.call(this, data, curr + 1, max, index, valpos);
-}
-
-/**
- * Search bootstrap
- * The function has to be executed in the context of the IndexedArray object
- */
-function search(index) {
-    var data = this.data;
-    return loop.call(this, data, 0, data.length - 1, index, this.valpos);
-}
-
-/**
- * Export search function
- */
-module.exports.search = search;
-
-
-/***/ }),
-
-/***/ 396:
-/***/ ((module) => {
-
-/**
- * Utils module
- */
-
-/**
- * Check if an object is an array-like object
- *
- * @credit Javascript: The Definitive Guide, O'Reilly, 2011
- */
-function isArrayLike(o) {
-    if (o &&                                 // o is not null, undefined, etc.
-        typeof o === "object" &&             // o is an object
-        isFinite(o.length) &&                // o.length is a finite number
-        o.length >= 0 &&                     // o.length is non-negative
-        o.length === Math.floor(o.length) && // o.length is an integer
-        o.length < 4294967296)               // o.length < 2^32
-        return true;                         // Then o is array-like
-    else
-        return false;                        // Otherwise it is not
-}
-
-/**
- * Check for the existence of the sort function in the object
- */
-function isSortable(o) {
-    if (o &&                                 // o is not null, undefined, etc.
-        typeof o === "object" &&             // o is an object
-        typeof o.sort === "function")        // o.sort is a function
-        return true;                         // Then o is array-like
-    else
-        return false;                        // Otherwise it is not
-}
-
-/**
- * Check for sortable-array-like objects
- */
-module.exports.isSortableArrayLike = function (o) {
-    return isArrayLike(o) && isSortable(o);
-};
-
-
-/***/ }),
-
-/***/ 215:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\r\n/* Anit-boostrap tactix */\n.trading-vue *,\r\n::after,\r\n::before {\r\n  box-sizing: content-box;\n}\n.trading-vue img {\r\n  vertical-align: initial;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 734:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-botbar {\r\n    position: relative !important;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 933:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.t-vue-lbtn-grp {\r\n    margin-left: 0.5em;\r\n    display: flex;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 937:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.tvjs-item-list {\r\n    position: absolute;\r\n    user-select: none;\r\n    margin-top: -5px;\n}\n.tvjs-item-list-item {\r\n    display: flex;\r\n    align-items: center;\r\n    padding-right: 20px;\r\n    font-size: 1.15em;\r\n    letter-spacing: 0.05em;\n}\n.tvjs-item-list-item:hover {\r\n    background-color: #76878319;\n}\n.tvjs-item-list-item * {\r\n    position: relative !important;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 565:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-legend {\r\n    position: relative;\r\n    z-index: 1;\r\n    font-size: 1.25em;\r\n    margin-left: 10px;\r\n    pointer-events: none;\r\n    text-align: left;\r\n    user-select: none;\r\n    font-weight: 300;\n}\n@media (min-resolution: 2x) {\n.trading-vue-legend {\r\n        font-weight: 400;\n}\n}\n.trading-vue-ohlcv {\r\n    pointer-events: none;\r\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\r\n    font-variant-numeric: tabular-nums;\r\n    font-size: 0.95em;\r\n    color: #999999;\r\n    /* TODO: move => params */\r\n    margin-left: 0.1em;\r\n    margin-right: 0.2em;\n}\n.t-vue-title {\r\n    font-size: 1.45em;\n}\n.t-vue-exchange{\r\n    font-size: 0.9em;\r\n    font-weight: 600;\r\n    margin-right: 0.25em;\n}\n.t-vue-ind {\r\n    display: flex;\r\n    margin-left: 0.2em;\r\n    margin-bottom: 0.5em;\r\n    font-size: 1.0em;\r\n    margin-top: 0.3em;\n}\n.t-vue-ivalue {\r\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\r\n    color: #999999;\r\n    /* TODO: move => params */\n}\n.tvjs-appear-enter-active,\r\n.tvjs-appear-leave-active {\r\n    transition: all .25s ease;\n}\n.tvjs-appear-enter,\r\n.tvjs-appear-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 554:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 617:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-section {\r\n  height: 0;\r\n  position: absolute;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 407:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.tvjs-spinner {\r\n    display: inline-block;\r\n    position: relative;\r\n    width: 20px;\r\n    height: 16px;\r\n    margin: -4px 0px -1px 0px;\r\n    opacity: 0.7;\n}\n.tvjs-spinner div {\r\n    position: absolute;\r\n    top: 8px;\r\n    width: 4px;\r\n    height: 4px;\r\n    border-radius: 50%;\r\n    animation-timing-function: cubic-bezier(1, 1, 1, 1);\n}\n.tvjs-spinner div:nth-child(1) {\r\n    left: 2px;\r\n    animation: tvjs-spinner1 0.6s infinite;\r\n    opacity: 0.9;\n}\n.tvjs-spinner div:nth-child(2) {\r\n    left: 2px;\r\n    animation: tvjs-spinner2 0.6s infinite;\n}\n.tvjs-spinner div:nth-child(3) {\r\n    left: 9px;\r\n    animation: tvjs-spinner2 0.6s infinite;\n}\n.tvjs-spinner div:nth-child(4) {\r\n    left: 16px;\r\n    animation: tvjs-spinner3 0.6s infinite;\r\n    opacity: 0.9;\n}\n@keyframes tvjs-spinner1 {\n0% {\r\n        transform: scale(0);\n}\n100% {\r\n        transform: scale(1);\n}\n}\n@keyframes tvjs-spinner3 {\n0% {\r\n        transform: scale(1);\n}\n100% {\r\n        transform: scale(0);\n}\n}\n@keyframes tvjs-spinner2 {\n0% {\r\n        transform: translate(0, 0);\n}\n100% {\r\n        transform: translate(7px, 0);\n}\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 965:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.tvjs-drift-enter-active {\r\n    transition: all .3s ease;\n}\n.tvjs-drift-leave-active {\r\n    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.tvjs-drift-enter, .tvjs-drift-leave-to\r\n{\r\n    transform: translateX(10px);\r\n    opacity: 0;\n}\n.tvjs-the-tip {\r\n    position: absolute;\r\n    width: 200px;\r\n    text-align: center;\r\n    z-index: 10001;\r\n    color: #ffffff;\r\n    font-size: 1.5em;\r\n    line-height: 1.15em;\r\n    padding: 10px;\r\n    border-radius: 3px;\r\n    right: 70px;\r\n    top: 10px;\r\n    text-shadow: 1px 1px black;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 686:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-legend {\r\n    position: relative;\r\n    z-index: 1;\r\n    font-size: 1.25em;\r\n    margin-left: 10px;\r\n    pointer-events: none;\r\n    text-align: left;\r\n    user-select: none;\r\n    font-weight: 300;\n}\n@media (min-resolution: 2x) {\n.trading-vue-legend {\r\n        font-weight: 400;\n}\n}\n.trading-vue-ohlcv {\r\n    pointer-events: none;\r\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\r\n    font-variant-numeric: tabular-nums;\r\n    font-size: 0.95em;\r\n    color: #999999;\r\n    /* TODO: move => params */\r\n    margin-left: 0.1em;\r\n    margin-right: 0.2em;\n}\n.t-vue-title {\r\n    font-size: 1.45em;\n}\n.t-vue-exchange{\r\n    font-size: 0.9em;\r\n    font-weight: 600;\r\n    margin-right: 0.25em;\n}\n.t-vue-ind {\r\n    display: flex;\r\n    margin-left: 0.2em;\r\n    margin-bottom: 0.5em;\r\n    font-size: 1.0em;\r\n    margin-top: 0.3em;\n}\n.t-vue-ivalue {\r\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\r\n    color: #999999;\r\n    /* TODO: move => params */\n}\n.tvjs-appear-enter-active,\r\n.tvjs-appear-leave-active {\r\n    transition: all .25s ease;\n}\n.tvjs-appear-enter,\r\n.tvjs-appear-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 583:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-toolbar {\r\n    position: absolute;\r\n    border-right: 1px solid black;\r\n    z-index: 101;\r\n    padding-top: 3px;\r\n    user-select: none;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 208:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\r\n    background-color: #76878319;\n}\n.trading-vue-tbitem-exp {\r\n    position: absolute;\r\n    right: -3px;\r\n    padding: 18.5px 5px;\r\n    font-stretch: extra-condensed;\r\n    transform: scaleX(0.6);\r\n    font-size: 0.6em;\r\n    opacity: 0.0;\r\n    user-select: none;\r\n    line-height: 0;\n}\n.trading-vue-tbitem:hover\r\n.trading-vue-tbitem-exp {\r\n    opacity: 0.5;\n}\n.trading-vue-tbitem-exp:hover {\r\n    background-color: #76878330;\r\n    opacity: 0.9 !important;\n}\n.trading-vue-tbicon {\r\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item > .trading-vue-tbicon,\r\n.tvjs-item-list-item.selected-item > .trading-vue-tbicon {\r\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.tvjs-pixelated {\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n    image-rendering: -webkit-optimize-contrast;\r\n    image-rendering: -webkit-crisp-edges;\r\n    image-rendering: -moz-crisp-edges;\r\n    image-rendering: -o-crisp-edges;\r\n    image-rendering: pixelated;\n}\r\n\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 555:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-ux-wrapper {\n    position: absolute;\n    display: flex;\n}\n.tvjs-ux-wrapper-pin {\n    position: absolute;\n    width: 9px;\n    height: 9px;\n    z-index: 100;\n    background-color: #23a776;\n    border-radius: 10px;\n    margin-left: -6px;\n    margin-top: -6px;\n    pointer-events: none;\n}\n.tvjs-ux-wrapper-head {\n    position: absolute;\n    height: 23px;\n    width: 100%;\n}\n.tvjs-ux-wrapper-close {\n    position: absolute;\n    width: 11px;\n    height: 11px;\n    font-size: 1.5em;\n    line-height: 0.5em;\n    padding: 1px 1px 1px 1px;\n    border-radius: 10px;\n    right: 5px;\n    top: 5px;\n    user-select: none;\n    text-align: center;\n    z-index: 100;\n}\n.tvjs-ux-wrapper-close-hb {\n}\n.tvjs-ux-wrapper-close:hover {\n    background-color: #FF605C !important;\n    color: #692324 !important;\n}\n.tvjs-ux-wrapper-full {\n}\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 260:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.tvjs-widgets {\r\n    position: absolute;\r\n    z-index: 1000;\r\n    pointer-events: none;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 314:
-/***/ ((module) => {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-// eslint-disable-next-line func-names
-module.exports = function (useSourceMap) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item, useSourceMap);
-
-      if (item[2]) {
-        return "@media ".concat(item[2], " {").concat(content, "}");
-      }
-
-      return content;
-    }).join('');
-  }; // import a list of modules into the list
-  // eslint-disable-next-line func-names
-
-
-  list.i = function (modules, mediaQuery, dedupe) {
-    if (typeof modules === 'string') {
-      // eslint-disable-next-line no-param-reassign
-      modules = [[null, modules, '']];
-    }
-
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      if (mediaQuery) {
-        if (!item[2]) {
-          item[2] = mediaQuery;
-        } else {
-          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
-        }
-      }
-
-      list.push(item);
-    }
-  };
-
-  return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
-
-  var cssMapping = item[3];
-
-  if (!cssMapping) {
-    return content;
-  }
-
-  if (useSourceMap && typeof btoa === 'function') {
-    var sourceMapping = toComment(cssMapping);
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-  }
-
-  return [content].join('\n');
-} // Adapted from convert-source-map (MIT)
-
-
-function toComment(sourceMap) {
-  // eslint-disable-next-line no-undef
-  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
-  return "/*# ".concat(data, " */");
-}
 
 /***/ }),
 
@@ -3324,9 +2918,67 @@ if (true) {
         return Hammer;
     }).call(exports, __webpack_require__, exports, module),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-} else {}
+} else // removed by dead control flow
+{}
 
 })(window, document, 'Hammer');
+
+
+/***/ }),
+
+/***/ 172:
+/***/ ((module) => {
+
+function _OverloadYield(e, d) {
+  this.v = e, this.k = d;
+}
+module.exports = _OverloadYield, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 179:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(554);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("3f4f243d", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 208:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\r\n    background-color: #76878319;\n}\n.trading-vue-tbitem-exp {\r\n    position: absolute;\r\n    right: -3px;\r\n    padding: 18.5px 5px;\r\n    font-stretch: extra-condensed;\r\n    transform: scaleX(0.6);\r\n    font-size: 0.6em;\r\n    opacity: 0.0;\r\n    user-select: none;\r\n    line-height: 0;\n}\n.trading-vue-tbitem:hover\r\n.trading-vue-tbitem-exp {\r\n    opacity: 0.5;\n}\n.trading-vue-tbitem-exp:hover {\r\n    background-color: #76878330;\r\n    opacity: 0.9 !important;\n}\n.trading-vue-tbicon {\r\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item > .trading-vue-tbicon,\r\n.tvjs-item-list-item.selected-item > .trading-vue-tbicon {\r\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.tvjs-pixelated {\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n    image-rendering: -webkit-optimize-contrast;\r\n    image-rendering: -webkit-crisp-edges;\r\n    image-rendering: -moz-crisp-edges;\r\n    image-rendering: -o-crisp-edges;\r\n    image-rendering: pixelated;\n}\r\n\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 215:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\r\n/* Anit-boostrap tactix */\n.trading-vue *,\r\n::after,\r\n::before {\r\n  box-sizing: content-box;\n}\n.trading-vue img {\r\n  vertical-align: initial;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
@@ -3655,9 +3307,1156 @@ if (typeof window.define === 'function' && window.define.amd) {
 } else if (true) {
   // CommonJS
   module.exports = Hamster;
-} else {}
+} else // removed by dead control flow
+{}
 
 })(window, window.document);
+
+
+/***/ }),
+
+/***/ 260:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.tvjs-widgets {\r\n    position: absolute;\r\n    z-index: 1000;\r\n    pointer-events: none;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 314:
+/***/ ((module) => {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+
+/***/ 364:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(215);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("5ac56fc3", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 373:
+/***/ ((module) => {
+
+function _regeneratorKeys(e) {
+  var n = Object(e),
+    r = [];
+  for (var t in n) r.unshift(t);
+  return function e() {
+    for (; r.length;) if ((t = r.pop()) in n) return e.value = t, e.done = !1, e;
+    return e.done = !0, e;
+  };
+}
+module.exports = _regeneratorKeys, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 392:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(555);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("7de21f27", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 395:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(208);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("413e01f6", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 396:
+/***/ ((module) => {
+
+/**
+ * Utils module
+ */
+
+/**
+ * Check if an object is an array-like object
+ *
+ * @credit Javascript: The Definitive Guide, O'Reilly, 2011
+ */
+function isArrayLike(o) {
+    if (o &&                                 // o is not null, undefined, etc.
+        typeof o === "object" &&             // o is an object
+        isFinite(o.length) &&                // o.length is a finite number
+        o.length >= 0 &&                     // o.length is non-negative
+        o.length === Math.floor(o.length) && // o.length is an integer
+        o.length < 4294967296)               // o.length < 2^32
+        return true;                         // Then o is array-like
+    else
+        return false;                        // Otherwise it is not
+}
+
+/**
+ * Check for the existence of the sort function in the object
+ */
+function isSortable(o) {
+    if (o &&                                 // o is not null, undefined, etc.
+        typeof o === "object" &&             // o is an object
+        typeof o.sort === "function")        // o.sort is a function
+        return true;                         // Then o is array-like
+    else
+        return false;                        // Otherwise it is not
+}
+
+/**
+ * Check for sortable-array-like objects
+ */
+module.exports.isSortableArrayLike = function (o) {
+    return isArrayLike(o) && isSortable(o);
+};
+
+
+/***/ }),
+
+/***/ 407:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.tvjs-spinner {\r\n    display: inline-block;\r\n    position: relative;\r\n    width: 20px;\r\n    height: 16px;\r\n    margin: -4px 0px -1px 0px;\r\n    opacity: 0.7;\n}\n.tvjs-spinner div {\r\n    position: absolute;\r\n    top: 8px;\r\n    width: 4px;\r\n    height: 4px;\r\n    border-radius: 50%;\r\n    animation-timing-function: cubic-bezier(1, 1, 1, 1);\n}\n.tvjs-spinner div:nth-child(1) {\r\n    left: 2px;\r\n    animation: tvjs-spinner1 0.6s infinite;\r\n    opacity: 0.9;\n}\n.tvjs-spinner div:nth-child(2) {\r\n    left: 2px;\r\n    animation: tvjs-spinner2 0.6s infinite;\n}\n.tvjs-spinner div:nth-child(3) {\r\n    left: 9px;\r\n    animation: tvjs-spinner2 0.6s infinite;\n}\n.tvjs-spinner div:nth-child(4) {\r\n    left: 16px;\r\n    animation: tvjs-spinner3 0.6s infinite;\r\n    opacity: 0.9;\n}\n@keyframes tvjs-spinner1 {\n0% {\r\n        transform: scale(0);\n}\n100% {\r\n        transform: scale(1);\n}\n}\n@keyframes tvjs-spinner3 {\n0% {\r\n        transform: scale(1);\n}\n100% {\r\n        transform: scale(0);\n}\n}\n@keyframes tvjs-spinner2 {\n0% {\r\n        transform: translate(0, 0);\n}\n100% {\r\n        transform: translate(7px, 0);\n}\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 427:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(260);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("85e1d57a", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 531:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(734);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("45aee8ee", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 534:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  A: () => (/* binding */ addStylesClient)
+});
+
+;// ./node_modules/vue-style-loader/lib/listToStyles.js
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+;// ./node_modules/vue-style-loader/lib/addStylesClient.js
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+function addStylesClient (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+
+/***/ 546:
+/***/ ((module) => {
+
+function _regeneratorDefine(e, r, n, t) {
+  var i = Object.defineProperty;
+  try {
+    i({}, "", {});
+  } catch (e) {
+    i = 0;
+  }
+  module.exports = _regeneratorDefine = function regeneratorDefine(e, r, n, t) {
+    function o(r, n) {
+      _regeneratorDefine(e, r, function (e) {
+        return this._invoke(r, n, e);
+      });
+    }
+    r ? i ? i(e, r, {
+      value: n,
+      enumerable: !t,
+      configurable: !t,
+      writable: !t
+    }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2));
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _regeneratorDefine(e, r, n, t);
+}
+module.exports = _regeneratorDefine, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 549:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-legend {\r\n    position: relative;\r\n    z-index: 1;\r\n    font-size: 1.25em;\r\n    margin-left: 10px;\r\n    pointer-events: none;\r\n    text-align: left;\r\n    user-select: none;\r\n    font-weight: 300;\n}\n@media (min-resolution: 2x) {\n.trading-vue-legend {\r\n        font-weight: 400;\n}\n}\n.trading-vue-ohlcv {\r\n    pointer-events: none;\r\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\r\n    font-variant-numeric: tabular-nums;\r\n    font-size: 0.95em;\r\n    color: #999999;\r\n    /* TODO: move => params */\r\n    margin-left: 0.1em;\r\n    margin-right: 0.2em;\n}\n.t-vue-title {\r\n    font-size: 1.45em;\n}\n.t-vue-exchange{\r\n    font-size: 0.9em;\r\n    font-weight: 600;\r\n    margin-right: 0.25em;\n}\n.t-vue-ind {\r\n    display: flex;\r\n    margin-left: 0.2em;\r\n    margin-bottom: 0.5em;\r\n    font-size: 1.0em;\r\n    margin-top: 0.3em;\n}\n.t-vue-ivalue {\r\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\r\n    color: #999999;\r\n    /* TODO: move => params */\n}\n.tvjs-appear-enter-active,\r\n.tvjs-appear-leave-active {\r\n    transition: all .25s ease;\n}\n.tvjs-appear-enter,\r\n.tvjs-appear-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 554:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 555:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-ux-wrapper {\n    position: absolute;\n    display: flex;\n}\n.tvjs-ux-wrapper-pin {\n    position: absolute;\n    width: 9px;\n    height: 9px;\n    z-index: 100;\n    background-color: #23a776;\n    border-radius: 10px;\n    margin-left: -6px;\n    margin-top: -6px;\n    pointer-events: none;\n}\n.tvjs-ux-wrapper-head {\n    position: absolute;\n    height: 23px;\n    width: 100%;\n}\n.tvjs-ux-wrapper-close {\n    position: absolute;\n    width: 11px;\n    height: 11px;\n    font-size: 1.5em;\n    line-height: 0.5em;\n    padding: 1px 1px 1px 1px;\n    border-radius: 10px;\n    right: 5px;\n    top: 5px;\n    user-select: none;\n    text-align: center;\n    z-index: 100;\n}\n.tvjs-ux-wrapper-close-hb {\n}\n.tvjs-ux-wrapper-close:hover {\n    background-color: #FF605C !important;\n    color: #692324 !important;\n}\n.tvjs-ux-wrapper-full {\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 565:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-legend {\r\n    position: relative;\r\n    z-index: 1;\r\n    font-size: 1.25em;\r\n    margin-left: 10px;\r\n    pointer-events: none;\r\n    text-align: left;\r\n    user-select: none;\r\n    font-weight: 300;\n}\n@media (min-resolution: 2x) {\n.trading-vue-legend {\r\n        font-weight: 400;\n}\n}\n.trading-vue-ohlcv {\r\n    pointer-events: none;\r\n    margin-bottom: 0.5em;\n}\n.t-vue-lspan {\r\n    font-variant-numeric: tabular-nums;\r\n    font-size: 0.95em;\r\n    color: #999999;\r\n    /* TODO: move => params */\r\n    margin-left: 0.1em;\r\n    margin-right: 0.2em;\n}\n.t-vue-title {\r\n    font-size: 1.45em;\n}\n.t-vue-exchange{\r\n    font-size: 0.9em;\r\n    font-weight: 600;\r\n    margin-right: 0.25em;\n}\n.t-vue-ind {\r\n    display: flex;\r\n    margin-left: 0.2em;\r\n    margin-bottom: 0.5em;\r\n    font-size: 1.0em;\r\n    margin-top: 0.3em;\n}\n.t-vue-ivalue {\r\n    margin-left: 0.5em;\n}\n.t-vue-unknown {\r\n    color: #999999;\r\n    /* TODO: move => params */\n}\n.tvjs-appear-enter-active,\r\n.tvjs-appear-leave-active {\r\n    transition: all .25s ease;\n}\n.tvjs-appear-enter,\r\n.tvjs-appear-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 574:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(549);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("0fc8f028", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 579:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _typeof = (__webpack_require__(738)["default"]);
+function _regeneratorValues(e) {
+  if (null != e) {
+    var t = e["function" == typeof Symbol && Symbol.iterator || "@@iterator"],
+      r = 0;
+    if (t) return t.call(e);
+    if ("function" == typeof e.next) return e;
+    if (!isNaN(e.length)) return {
+      next: function next() {
+        return e && r >= e.length && (e = void 0), {
+          value: e && e[r++],
+          done: !e
+        };
+      }
+    };
+  }
+  throw new TypeError(_typeof(e) + " is not iterable");
+}
+module.exports = _regeneratorValues, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 583:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-toolbar {\r\n    position: absolute;\r\n    border-right: 1px solid black;\r\n    z-index: 101;\r\n    padding-top: 3px;\r\n    user-select: none;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 600:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(565);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("a139135c", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 617:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-section {\r\n  height: 0;\r\n  position: absolute;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 633:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var OverloadYield = __webpack_require__(172);
+var regenerator = __webpack_require__(993);
+var regeneratorAsync = __webpack_require__(869);
+var regeneratorAsyncGen = __webpack_require__(887);
+var regeneratorAsyncIterator = __webpack_require__(791);
+var regeneratorKeys = __webpack_require__(373);
+var regeneratorValues = __webpack_require__(579);
+function _regeneratorRuntime() {
+  "use strict";
+
+  var r = regenerator(),
+    e = r.m(_regeneratorRuntime),
+    t = (Object.getPrototypeOf ? Object.getPrototypeOf(e) : e.__proto__).constructor;
+  function n(r) {
+    var e = "function" == typeof r && r.constructor;
+    return !!e && (e === t || "GeneratorFunction" === (e.displayName || e.name));
+  }
+  var o = {
+    "throw": 1,
+    "return": 2,
+    "break": 3,
+    "continue": 3
+  };
+  function a(r) {
+    var e, t;
+    return function (n) {
+      e || (e = {
+        stop: function stop() {
+          return t(n.a, 2);
+        },
+        "catch": function _catch() {
+          return n.v;
+        },
+        abrupt: function abrupt(r, e) {
+          return t(n.a, o[r], e);
+        },
+        delegateYield: function delegateYield(r, o, a) {
+          return e.resultName = o, t(n.d, regeneratorValues(r), a);
+        },
+        finish: function finish(r) {
+          return t(n.f, r);
+        }
+      }, t = function t(r, _t, o) {
+        n.p = e.prev, n.n = e.next;
+        try {
+          return r(_t, o);
+        } finally {
+          e.next = n.n;
+        }
+      }), e.resultName && (e[e.resultName] = n.v, e.resultName = void 0), e.sent = n.v, e.next = n.n;
+      try {
+        return r.call(this, e);
+      } finally {
+        n.p = e.prev, n.n = e.next;
+      }
+    };
+  }
+  return (module.exports = _regeneratorRuntime = function _regeneratorRuntime() {
+    return {
+      wrap: function wrap(e, t, n, o) {
+        return r.w(a(e), t, n, o && o.reverse());
+      },
+      isGeneratorFunction: n,
+      mark: r.m,
+      awrap: function awrap(r, e) {
+        return new OverloadYield(r, e);
+      },
+      AsyncIterator: regeneratorAsyncIterator,
+      async: function async(r, e, t, o, u) {
+        return (n(e) ? regeneratorAsyncGen : regeneratorAsync)(a(r), e, t, o, u);
+      },
+      keys: regeneratorKeys,
+      values: regeneratorValues
+    };
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
+}
+module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 688:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(407);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("0f5b62f0", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 734:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-botbar {\r\n    position: relative !important;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 738:
+/***/ ((module) => {
+
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof(o);
+}
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 756:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// TODO(Babel 8): Remove this file.
+
+var runtime = __webpack_require__(633)();
+module.exports = runtime;
+
+// Copied from https://github.com/facebook/regenerator/blob/main/packages/runtime/runtime.js#L736=
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
+}
+
+
+/***/ }),
+
+/***/ 791:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var OverloadYield = __webpack_require__(172);
+var regeneratorDefine = __webpack_require__(546);
+function AsyncIterator(t, e) {
+  function n(r, o, i, f) {
+    try {
+      var c = t[r](o),
+        u = c.value;
+      return u instanceof OverloadYield ? e.resolve(u.v).then(function (t) {
+        n("next", t, i, f);
+      }, function (t) {
+        n("throw", t, i, f);
+      }) : e.resolve(u).then(function (t) {
+        c.value = t, i(c);
+      }, function (t) {
+        return n("throw", t, i, f);
+      });
+    } catch (t) {
+      f(t);
+    }
+  }
+  var r;
+  this.next || (regeneratorDefine(AsyncIterator.prototype), regeneratorDefine(AsyncIterator.prototype, "function" == typeof Symbol && Symbol.asyncIterator || "@asyncIterator", function () {
+    return this;
+  })), regeneratorDefine(this, "_invoke", function (t, o, i) {
+    function f() {
+      return new e(function (e, r) {
+        n(t, i, e, r);
+      });
+    }
+    return r = r ? r.then(f, f) : f();
+  }, !0);
+}
+module.exports = AsyncIterator, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 796:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(937);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("2b589460", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 834:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(933);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("0fc51e60", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 869:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var regeneratorAsyncGen = __webpack_require__(887);
+function _regeneratorAsync(n, e, r, t, o) {
+  var a = regeneratorAsyncGen(n, e, r, t, o);
+  return a.next().then(function (n) {
+    return n.done ? n.value : a.next();
+  });
+}
+module.exports = _regeneratorAsync, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 874:
+/***/ ((module) => {
+
+/**
+ * Binary search implementation
+ */
+
+/**
+ * Main search recursive function
+ */
+function loop(data, min, max, index, valpos) {
+
+    // set current position as the middle point between min and max
+    var curr = (max + min) >>> 1;
+
+    // compare current index value with the one we are looking for
+    var diff = this.compare(data[curr][this.index], index);
+
+    // found?
+    if (!diff) {
+        return valpos[index] = {
+            "found": true,
+            "index": curr,
+            "prev": null,
+            "next": null
+        };
+    }
+
+    // no more positions available?
+    if (min >= max) {
+        return valpos[index] = {
+            "found": false,
+            "index": null,
+            "prev": (diff < 0) ? max : max - 1,
+            "next": (diff < 0) ? max + 1 : max
+        };
+    }
+
+    // continue looking for index in one of the remaining array halves
+    // current position can be skept as index is not there...
+    if (diff > 0)
+        return loop.call(this, data, min, curr - 1, index, valpos);
+    else
+        return loop.call(this, data, curr + 1, max, index, valpos);
+}
+
+/**
+ * Search bootstrap
+ * The function has to be executed in the context of the IndexedArray object
+ */
+function search(index) {
+    var data = this.data;
+    return loop.call(this, data, 0, data.length - 1, index, this.valpos);
+}
+
+/**
+ * Export search function
+ */
+module.exports.search = search;
+
+
+/***/ }),
+
+/***/ 878:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(617);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("2c725dc4", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 887:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var regenerator = __webpack_require__(993);
+var regeneratorAsyncIterator = __webpack_require__(791);
+function _regeneratorAsyncGen(r, e, t, o, n) {
+  return new regeneratorAsyncIterator(regenerator().w(r, e, t, o), n || Promise);
+}
+module.exports = _regeneratorAsyncGen, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 892:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(965);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("869c9886", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 928:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(583);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("84d4e530", content, false, {});
+// Hot Module Replacement
+if(false) // removed by dead control flow
+{}
+
+/***/ }),
+
+/***/ 933:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.t-vue-lbtn-grp {\r\n    margin-left: 0.5em;\r\n    display: flex;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 937:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.tvjs-item-list {\r\n    position: absolute;\r\n    user-select: none;\r\n    margin-top: -5px;\n}\n.tvjs-item-list-item {\r\n    display: flex;\r\n    align-items: center;\r\n    padding-right: 20px;\r\n    font-size: 1.15em;\r\n    letter-spacing: 0.05em;\n}\n.tvjs-item-list-item:hover {\r\n    background-color: #76878319;\n}\n.tvjs-item-list-item * {\r\n    position: relative !important;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 965:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.tvjs-drift-enter-active {\r\n    transition: all .3s ease;\n}\n.tvjs-drift-leave-active {\r\n    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.tvjs-drift-enter, .tvjs-drift-leave-to\r\n{\r\n    transform: translateX(10px);\r\n    opacity: 0;\n}\n.tvjs-the-tip {\r\n    position: absolute;\r\n    width: 200px;\r\n    text-align: center;\r\n    z-index: 10001;\r\n    color: #ffffff;\r\n    font-size: 1.5em;\r\n    line-height: 1.15em;\r\n    padding: 10px;\r\n    border-radius: 3px;\r\n    right: 70px;\r\n    top: 10px;\r\n    text-shadow: 1px 1px black;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
@@ -4164,874 +4963,104 @@ var LZString = {
 if (true) {
   !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () { return LZString; }).call(exports, __webpack_require__, exports, module),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-} else {}
+} else // removed by dead control flow
+{}
 
 
 /***/ }),
 
-/***/ 364:
+/***/ 993:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(215);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("5ac56fc3", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 531:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(734);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("45aee8ee", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 834:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(933);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("0fc51e60", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 796:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(937);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("2b589460", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 600:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(565);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("a139135c", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 179:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(554);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("3f4f243d", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 878:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(617);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("2c725dc4", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 688:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(407);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("0f5b62f0", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 892:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(965);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("869c9886", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 229:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(686);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("8867e5d6", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 928:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(583);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("84d4e530", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 395:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(208);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("413e01f6", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 392:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(555);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("7de21f27", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 427:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(260);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("85e1d57a", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
-/***/ 534:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  A: () => (/* binding */ addStylesClient)
-});
-
-;// ./node_modules/vue-style-loader/lib/listToStyles.js
-/**
- * Translates the list format produced by css-loader into something
- * easier to manipulate.
- */
-function listToStyles (parentId, list) {
-  var styles = []
-  var newStyles = {}
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i]
-    var id = item[0]
-    var css = item[1]
-    var media = item[2]
-    var sourceMap = item[3]
-    var part = {
-      id: parentId + ':' + i,
-      css: css,
-      media: media,
-      sourceMap: sourceMap
-    }
-    if (!newStyles[id]) {
-      styles.push(newStyles[id] = { id: id, parts: [part] })
-    } else {
-      newStyles[id].parts.push(part)
-    }
-  }
-  return styles
-}
-
-;// ./node_modules/vue-style-loader/lib/addStylesClient.js
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-  Modified by Evan You @yyx990803
-*/
-
-
-
-var hasDocument = typeof document !== 'undefined'
-
-if (typeof DEBUG !== 'undefined' && DEBUG) {
-  if (!hasDocument) {
-    throw new Error(
-    'vue-style-loader cannot be used in a non-browser environment. ' +
-    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
-  ) }
-}
-
-/*
-type StyleObject = {
-  id: number;
-  parts: Array<StyleObjectPart>
-}
-
-type StyleObjectPart = {
-  css: string;
-  media: string;
-  sourceMap: ?string
-}
-*/
-
-var stylesInDom = {/*
-  [id: number]: {
-    id: number,
-    refs: number,
-    parts: Array<(obj?: StyleObjectPart) => void>
-  }
-*/}
-
-var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
-var singletonElement = null
-var singletonCounter = 0
-var isProduction = false
-var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
-
-// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-// tags it will allow on a page
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
-
-function addStylesClient (parentId, list, _isProduction, _options) {
-  isProduction = _isProduction
-
-  options = _options || {}
-
-  var styles = listToStyles(parentId, list)
-  addStylesToDom(styles)
-
-  return function update (newList) {
-    var mayRemove = []
-    for (var i = 0; i < styles.length; i++) {
-      var item = styles[i]
-      var domStyle = stylesInDom[item.id]
-      domStyle.refs--
-      mayRemove.push(domStyle)
-    }
-    if (newList) {
-      styles = listToStyles(parentId, newList)
-      addStylesToDom(styles)
-    } else {
-      styles = []
-    }
-    for (var i = 0; i < mayRemove.length; i++) {
-      var domStyle = mayRemove[i]
-      if (domStyle.refs === 0) {
-        for (var j = 0; j < domStyle.parts.length; j++) {
-          domStyle.parts[j]()
+var regeneratorDefine = __webpack_require__(546);
+function _regenerator() {
+  /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */
+  var e,
+    t,
+    r = "function" == typeof Symbol ? Symbol : {},
+    n = r.iterator || "@@iterator",
+    o = r.toStringTag || "@@toStringTag";
+  function i(r, n, o, i) {
+    var c = n && n.prototype instanceof Generator ? n : Generator,
+      u = Object.create(c.prototype);
+    return regeneratorDefine(u, "_invoke", function (r, n, o) {
+      var i,
+        c,
+        u,
+        f = 0,
+        p = o || [],
+        y = !1,
+        G = {
+          p: 0,
+          n: 0,
+          v: e,
+          a: d,
+          f: d.bind(e, 4),
+          d: function d(t, r) {
+            return i = t, c = 0, u = e, G.n = r, a;
+          }
+        };
+      function d(r, n) {
+        for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) {
+          var o,
+            i = p[t],
+            d = G.p,
+            l = i[2];
+          r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0));
         }
-        delete stylesInDom[domStyle.id]
+        if (o || r > 1) return a;
+        throw y = !0, n;
       }
-    }
-  }
-}
-
-function addStylesToDom (styles /* Array<StyleObject> */) {
-  for (var i = 0; i < styles.length; i++) {
-    var item = styles[i]
-    var domStyle = stylesInDom[item.id]
-    if (domStyle) {
-      domStyle.refs++
-      for (var j = 0; j < domStyle.parts.length; j++) {
-        domStyle.parts[j](item.parts[j])
-      }
-      for (; j < item.parts.length; j++) {
-        domStyle.parts.push(addStyle(item.parts[j]))
-      }
-      if (domStyle.parts.length > item.parts.length) {
-        domStyle.parts.length = item.parts.length
-      }
-    } else {
-      var parts = []
-      for (var j = 0; j < item.parts.length; j++) {
-        parts.push(addStyle(item.parts[j]))
-      }
-      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
-    }
-  }
-}
-
-function createStyleElement () {
-  var styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
-  head.appendChild(styleElement)
-  return styleElement
-}
-
-function addStyle (obj /* StyleObjectPart */) {
-  var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
-
-  if (styleElement) {
-    if (isProduction) {
-      // has SSR styles and in production mode.
-      // simply do nothing.
-      return noop
-    } else {
-      // has SSR styles but in dev mode.
-      // for some reason Chrome can't handle source map in server-rendered
-      // style tags - source maps in <style> only works if the style tag is
-      // created and inserted dynamically. So we remove the server rendered
-      // styles and inject new ones.
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  if (isOldIE) {
-    // use singleton mode for IE9.
-    var styleIndex = singletonCounter++
-    styleElement = singletonElement || (singletonElement = createStyleElement())
-    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
-    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
-  } else {
-    // use multi-style-tag mode in all other cases
-    styleElement = createStyleElement()
-    update = applyToTag.bind(null, styleElement)
-    remove = function () {
-      styleElement.parentNode.removeChild(styleElement)
-    }
-  }
-
-  update(obj)
-
-  return function updateStyle (newObj /* StyleObjectPart */) {
-    if (newObj) {
-      if (newObj.css === obj.css &&
-          newObj.media === obj.media &&
-          newObj.sourceMap === obj.sourceMap) {
-        return
-      }
-      update(obj = newObj)
-    } else {
-      remove()
-    }
-  }
-}
-
-var replaceText = (function () {
-  var textStore = []
-
-  return function (index, replacement) {
-    textStore[index] = replacement
-    return textStore.filter(Boolean).join('\n')
-  }
-})()
-
-function applyToSingletonTag (styleElement, index, remove, obj) {
-  var css = remove ? '' : obj.css
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = replaceText(index, css)
-  } else {
-    var cssNode = document.createTextNode(css)
-    var childNodes = styleElement.childNodes
-    if (childNodes[index]) styleElement.removeChild(childNodes[index])
-    if (childNodes.length) {
-      styleElement.insertBefore(cssNode, childNodes[index])
-    } else {
-      styleElement.appendChild(cssNode)
-    }
-  }
-}
-
-function applyToTag (styleElement, obj) {
-  var css = obj.css
-  var media = obj.media
-  var sourceMap = obj.sourceMap
-
-  if (media) {
-    styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
-  }
-
-  if (sourceMap) {
-    // https://developer.chrome.com/devtools/docs/javascript-debugging
-    // this makes source maps inside style tags work properly in Chrome
-    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
-    // http://stackoverflow.com/a/26603875
-    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
-  }
-
-  if (styleElement.styleSheet) {
-    styleElement.styleSheet.cssText = css
-  } else {
-    while (styleElement.firstChild) {
-      styleElement.removeChild(styleElement.firstChild)
-    }
-    styleElement.appendChild(document.createTextNode(css))
-  }
-}
-
-
-/***/ }),
-
-/***/ 633:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var _typeof = (__webpack_require__(738)["default"]);
-function _regeneratorRuntime() {
-  "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
-  module.exports = _regeneratorRuntime = function _regeneratorRuntime() {
-    return e;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  var t,
-    e = {},
-    r = Object.prototype,
-    n = r.hasOwnProperty,
-    o = Object.defineProperty || function (t, e, r) {
-      t[e] = r.value;
-    },
-    i = "function" == typeof Symbol ? Symbol : {},
-    a = i.iterator || "@@iterator",
-    c = i.asyncIterator || "@@asyncIterator",
-    u = i.toStringTag || "@@toStringTag";
-  function define(t, e, r) {
-    return Object.defineProperty(t, e, {
-      value: r,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }), t[e];
-  }
-  try {
-    define({}, "");
-  } catch (t) {
-    define = function define(t, e, r) {
-      return t[e] = r;
-    };
-  }
-  function wrap(t, e, r, n) {
-    var i = e && e.prototype instanceof Generator ? e : Generator,
-      a = Object.create(i.prototype),
-      c = new Context(n || []);
-    return o(a, "_invoke", {
-      value: makeInvokeMethod(t, r, c)
-    }), a;
-  }
-  function tryCatch(t, e, r) {
-    try {
-      return {
-        type: "normal",
-        arg: t.call(e, r)
+      return function (o, p, l) {
+        if (f > 1) throw TypeError("Generator is already running");
+        for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) {
+          i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u);
+          try {
+            if (f = 2, i) {
+              if (c || (o = "next"), t = i[o]) {
+                if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object");
+                if (!t.done) return t;
+                u = t.value, c < 2 && (c = 0);
+              } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1);
+              i = e;
+            } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break;
+          } catch (t) {
+            i = e, c = 1, u = t;
+          } finally {
+            f = 1;
+          }
+        }
+        return {
+          value: t,
+          done: y
+        };
       };
-    } catch (t) {
-      return {
-        type: "throw",
-        arg: t
-      };
-    }
+    }(r, o, i), !0), u;
   }
-  e.wrap = wrap;
-  var h = "suspendedStart",
-    l = "suspendedYield",
-    f = "executing",
-    s = "completed",
-    y = {};
+  var a = {};
   function Generator() {}
   function GeneratorFunction() {}
   function GeneratorFunctionPrototype() {}
-  var p = {};
-  define(p, a, function () {
+  t = Object.getPrototypeOf;
+  var c = [][n] ? t(t([][n]())) : (regeneratorDefine(t = {}, n, function () {
+      return this;
+    }), t),
+    u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c);
+  function f(e) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, regeneratorDefine(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e;
+  }
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, regeneratorDefine(u, "constructor", GeneratorFunctionPrototype), regeneratorDefine(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", regeneratorDefine(GeneratorFunctionPrototype, o, "GeneratorFunction"), regeneratorDefine(u), regeneratorDefine(u, o, "Generator"), regeneratorDefine(u, n, function () {
     return this;
-  });
-  var d = Object.getPrototypeOf,
-    v = d && d(d(values([])));
-  v && v !== r && n.call(v, a) && (p = v);
-  var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p);
-  function defineIteratorMethods(t) {
-    ["next", "throw", "return"].forEach(function (e) {
-      define(t, e, function (t) {
-        return this._invoke(e, t);
-      });
-    });
-  }
-  function AsyncIterator(t, e) {
-    function invoke(r, o, i, a) {
-      var c = tryCatch(t[r], t, o);
-      if ("throw" !== c.type) {
-        var u = c.arg,
-          h = u.value;
-        return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) {
-          invoke("next", t, i, a);
-        }, function (t) {
-          invoke("throw", t, i, a);
-        }) : e.resolve(h).then(function (t) {
-          u.value = t, i(u);
-        }, function (t) {
-          return invoke("throw", t, i, a);
-        });
-      }
-      a(c.arg);
-    }
-    var r;
-    o(this, "_invoke", {
-      value: function value(t, n) {
-        function callInvokeWithMethodAndArg() {
-          return new e(function (e, r) {
-            invoke(t, n, e, r);
-          });
-        }
-        return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
-      }
-    });
-  }
-  function makeInvokeMethod(e, r, n) {
-    var o = h;
-    return function (i, a) {
-      if (o === f) throw Error("Generator is already running");
-      if (o === s) {
-        if ("throw" === i) throw a;
-        return {
-          value: t,
-          done: !0
-        };
-      }
-      for (n.method = i, n.arg = a;;) {
-        var c = n.delegate;
-        if (c) {
-          var u = maybeInvokeDelegate(c, n);
-          if (u) {
-            if (u === y) continue;
-            return u;
-          }
-        }
-        if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) {
-          if (o === h) throw o = s, n.arg;
-          n.dispatchException(n.arg);
-        } else "return" === n.method && n.abrupt("return", n.arg);
-        o = f;
-        var p = tryCatch(e, r, n);
-        if ("normal" === p.type) {
-          if (o = n.done ? s : l, p.arg === y) continue;
-          return {
-            value: p.arg,
-            done: n.done
-          };
-        }
-        "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg);
-      }
-    };
-  }
-  function maybeInvokeDelegate(e, r) {
-    var n = r.method,
-      o = e.iterator[n];
-    if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y;
-    var i = tryCatch(o, e.iterator, r.arg);
-    if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y;
-    var a = i.arg;
-    return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y);
-  }
-  function pushTryEntry(t) {
-    var e = {
-      tryLoc: t[0]
-    };
-    1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e);
-  }
-  function resetTryEntry(t) {
-    var e = t.completion || {};
-    e.type = "normal", delete e.arg, t.completion = e;
-  }
-  function Context(t) {
-    this.tryEntries = [{
-      tryLoc: "root"
-    }], t.forEach(pushTryEntry, this), this.reset(!0);
-  }
-  function values(e) {
-    if (e || "" === e) {
-      var r = e[a];
-      if (r) return r.call(e);
-      if ("function" == typeof e.next) return e;
-      if (!isNaN(e.length)) {
-        var o = -1,
-          i = function next() {
-            for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next;
-            return next.value = t, next.done = !0, next;
-          };
-        return i.next = i;
-      }
-    }
-    throw new TypeError(_typeof(e) + " is not iterable");
-  }
-  return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", {
-    value: GeneratorFunctionPrototype,
-    configurable: !0
-  }), o(GeneratorFunctionPrototype, "constructor", {
-    value: GeneratorFunction,
-    configurable: !0
-  }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) {
-    var e = "function" == typeof t && t.constructor;
-    return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name));
-  }, e.mark = function (t) {
-    return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t;
-  }, e.awrap = function (t) {
-    return {
-      __await: t
-    };
-  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () {
-    return this;
-  }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) {
-    void 0 === i && (i = Promise);
-    var a = new AsyncIterator(wrap(t, r, n, o), i);
-    return e.isGeneratorFunction(r) ? a : a.next().then(function (t) {
-      return t.done ? t.value : a.next();
-    });
-  }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () {
-    return this;
-  }), define(g, "toString", function () {
+  }), regeneratorDefine(u, "toString", function () {
     return "[object Generator]";
-  }), e.keys = function (t) {
-    var e = Object(t),
-      r = [];
-    for (var n in e) r.push(n);
-    return r.reverse(), function next() {
-      for (; r.length;) {
-        var t = r.pop();
-        if (t in e) return next.value = t, next.done = !1, next;
-      }
-      return next.done = !0, next;
+  }), (module.exports = _regenerator = function _regenerator() {
+    return {
+      w: i,
+      m: f
     };
-  }, e.values = values, Context.prototype = {
-    constructor: Context,
-    reset: function reset(e) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t);
-    },
-    stop: function stop() {
-      this.done = !0;
-      var t = this.tryEntries[0].completion;
-      if ("throw" === t.type) throw t.arg;
-      return this.rval;
-    },
-    dispatchException: function dispatchException(e) {
-      if (this.done) throw e;
-      var r = this;
-      function handle(n, o) {
-        return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o;
-      }
-      for (var o = this.tryEntries.length - 1; o >= 0; --o) {
-        var i = this.tryEntries[o],
-          a = i.completion;
-        if ("root" === i.tryLoc) return handle("end");
-        if (i.tryLoc <= this.prev) {
-          var c = n.call(i, "catchLoc"),
-            u = n.call(i, "finallyLoc");
-          if (c && u) {
-            if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
-            if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
-          } else if (c) {
-            if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
-          } else {
-            if (!u) throw Error("try statement without catch or finally");
-            if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
-          }
-        }
-      }
-    },
-    abrupt: function abrupt(t, e) {
-      for (var r = this.tryEntries.length - 1; r >= 0; --r) {
-        var o = this.tryEntries[r];
-        if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) {
-          var i = o;
-          break;
-        }
-      }
-      i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null);
-      var a = i ? i.completion : {};
-      return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a);
-    },
-    complete: function complete(t, e) {
-      if ("throw" === t.type) throw t.arg;
-      return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y;
-    },
-    finish: function finish(t) {
-      for (var e = this.tryEntries.length - 1; e >= 0; --e) {
-        var r = this.tryEntries[e];
-        if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y;
-      }
-    },
-    "catch": function _catch(t) {
-      for (var e = this.tryEntries.length - 1; e >= 0; --e) {
-        var r = this.tryEntries[e];
-        if (r.tryLoc === t) {
-          var n = r.completion;
-          if ("throw" === n.type) {
-            var o = n.arg;
-            resetTryEntry(r);
-          }
-          return o;
-        }
-      }
-      throw Error("illegal catch attempt");
-    },
-    delegateYield: function delegateYield(e, r, n) {
-      return this.delegate = {
-        iterator: values(e),
-        resultName: r,
-        nextLoc: n
-      }, "next" === this.method && (this.arg = t), y;
-    }
-  }, e;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
 }
-module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 738:
-/***/ ((module) => {
-
-function _typeof(o) {
-  "@babel/helpers - typeof";
-
-  return module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-    return typeof o;
-  } : function (o) {
-    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof(o);
-}
-module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 756:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// TODO(Babel 8): Remove this file.
-
-var runtime = __webpack_require__(633)();
-module.exports = runtime;
-
-// Copied from https://github.com/facebook/regenerator/blob/main/packages/runtime/runtime.js#L736=
-try {
-  regeneratorRuntime = runtime;
-} catch (accidentalStrictMode) {
-  if (typeof globalThis === "object") {
-    globalThis.regeneratorRuntime = runtime;
-  } else {
-    Function("r", "regeneratorRuntime = r")(runtime);
-  }
-}
-
+module.exports = _regenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ })
 
@@ -5104,7 +5133,7 @@ try {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
 // ESM COMPAT FLAG
@@ -5131,86 +5160,86 @@ __webpack_require__.d(__webpack_exports__, {
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "trading-vue",
     style: {
       color: this.chart_props.colors.text,
       font: this.font_comp,
-      width: this.width + "px",
-      height: this.height + "px"
+      width: this.width + 'px',
+      height: this.height + 'px'
     },
     attrs: {
-      id: _vm.id
+      "id": _vm.id
     },
     on: {
-      mousedown: _vm.mousedown,
-      mouseleave: _vm.mouseleave
+      "mousedown": _vm.mousedown,
+      "mouseleave": _vm.mouseleave
     }
-  }, [_vm.toolbar ? _c("toolbar", _vm._b({
+  }, [_vm.toolbar ? _c('toolbar', _vm._b({
     ref: "toolbar",
     attrs: {
-      config: _vm.chart_config
+      "config": _vm.chart_config
     },
     on: {
       "custom-event": _vm.custom_event
     }
-  }, "toolbar", _vm.chart_props, false)) : _vm._e(), _vm._v(" "), _vm.showTitleChartLegend ? _c("title-legend-chart", {
+  }, 'toolbar', _vm.chart_props, false)) : _vm._e(), _vm._v(" "), _vm.showTitleChartLegend ? _c('title-legend-chart', {
     ref: "legend",
     attrs: {
-      values: _vm.section_values,
-      decimalPlace: _vm.decimalPlace,
-      legendDecimal: _vm.legendDecimal,
-      grid_id: 0,
-      common: _vm.main_section_legend_props,
-      meta_props: _vm.layer_meta_values
+      "values": _vm.section_values,
+      "decimalPlace": _vm.decimalPlace,
+      "legendDecimal": _vm.legendDecimal,
+      "grid_id": 0,
+      "common": _vm.main_section_legend_props,
+      "meta_props": _vm.layer_meta_values
     }
-  }) : _vm._e(), _vm._v(" "), _vm.controllers.length ? _c("widgets", {
+  }) : _vm._e(), _vm._v(" "), _vm.controllers.length ? _c('widgets', {
     ref: "widgets",
     attrs: {
-      map: _vm.ws,
-      width: _vm.width,
-      height: _vm.height,
-      tv: this,
-      dc: _vm.data
+      "map": _vm.ws,
+      "width": _vm.width,
+      "height": _vm.height,
+      "tv": this,
+      "dc": _vm.data
     }
-  }) : _vm._e(), _vm._v(" "), _c("chart", _vm._b({
+  }) : _vm._e(), _vm._v(" "), _c('chart', _vm._b({
     key: _vm.reset,
     ref: "chart",
     attrs: {
-      enableZoom: _vm.enableZoom,
-      showTitleChartLegend: _vm.showTitleChartLegend,
-      isOverlayCollapsed: _vm.isOverlayCollapsed,
-      collpaseButton: _vm.collpaseButton,
-      enableSideBarBoxValue: _vm.enableSideBarBoxValue,
-      applyShaders: _vm.applyShaders,
-      priceLine: _vm.priceLine,
-      decimalPlace: _vm.decimalPlace,
-      legendDecimal: _vm.legendDecimal,
-      enableCrosshair: _vm.enableCrosshair,
-      ignoreNegativeIndex: _vm.ignoreNegativeIndex,
-      ignore_OHLC: _vm.ignore_OHLC,
-      tv_id: _vm.id,
-      config: _vm.chart_config
+      "enableZoom": _vm.enableZoom,
+      "showTitleChartLegend": _vm.showTitleChartLegend,
+      "isOverlayCollapsed": _vm.isOverlayCollapsed,
+      "collpaseButton": _vm.collpaseButton,
+      "enableSideBarBoxValue": _vm.enableSideBarBoxValue,
+      "applyShaders": _vm.applyShaders,
+      "priceLine": _vm.priceLine,
+      "decimalPlace": _vm.decimalPlace,
+      "legendDecimal": _vm.legendDecimal,
+      "enableCrosshair": _vm.enableCrosshair,
+      "ignoreNegativeIndex": _vm.ignoreNegativeIndex,
+      "ignore_OHLC": _vm.ignore_OHLC,
+      "tv_id": _vm.id,
+      "config": _vm.chart_config
     },
     on: {
       "custom-event": _vm.custom_event,
       "range-changed": _vm.range_changed,
-      chart_data_changed: _vm.chart_data_changed,
+      "chart_data_changed": _vm.chart_data_changed,
       "sidebar-transform": _vm.sidebar_transform,
       "legend-button-click": _vm.legend_button,
       "on-collapse-change": _vm.collapse_button,
-      updateSection: _vm.updateSection,
-      updateMeta: _vm.updateMeta,
-      updateLayerMeta: _vm.updateLayerMeta,
-      updateCursorMode: _vm.updateCursorMode
+      "updateSection": _vm.updateSection,
+      "updateMeta": _vm.updateMeta,
+      "updateLayerMeta": _vm.updateLayerMeta,
+      "updateCursorMode": _vm.updateCursorMode
     }
-  }, "chart", _vm.chart_props, false)), _vm._v(" "), _c("transition", {
+  }, 'chart', _vm.chart_props, false)), _vm._v(" "), _c('transition', {
     attrs: {
-      name: "tvjs-drift"
+      "name": "tvjs-drift"
     }
-  }, [_vm.tip ? _c("the-tip", {
+  }, [_vm.tip ? _c('the-tip', {
     attrs: {
-      data: _vm.tip
+      "data": _vm.tip
     },
     on: {
       "remove-me": function removeMe($event) {
@@ -5270,31 +5299,31 @@ function _toConsumableArray(r) {
 var Chartvue_type_template_id_ed8fb83a_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "trading-vue-chart",
     style: _vm.styles
-  }, [_c("keyboard", {
+  }, [_c('keyboard', {
     ref: "keyboard"
   }), _vm._v(" "), _vm._l(this._layout.grids, function (grid, i) {
-    return _c("grid-section", {
+    return _c('grid-section', {
       key: grid.id,
       ref: "sec",
       refInFor: true,
       attrs: {
-        common: _vm.section_props(i),
-        grid_id: i,
-        enableZoom: _vm.enableZoom,
-        enableSideBarBoxValue: _vm.enableSideBarBoxValue,
-        decimalPlace: _vm.decimalPlace,
-        legendDecimal: _vm.legendDecimal,
-        applyShaders: _vm.applyShaders,
-        priceLine: _vm.priceLine,
-        enableCrosshair: _vm.enableCrosshair,
-        ignore_OHLC: _vm.ignore_OHLC,
-        tv_id: _vm.tv_id,
-        showTitleChartLegend: _vm.showTitleChartLegend,
-        isOverlayCollapsed: _vm.isOverlayCollapsed,
-        collpaseButton: _vm.collpaseButton
+        "common": _vm.section_props(i),
+        "grid_id": i,
+        "enableZoom": _vm.enableZoom,
+        "enableSideBarBoxValue": _vm.enableSideBarBoxValue,
+        "decimalPlace": _vm.decimalPlace,
+        "legendDecimal": _vm.legendDecimal,
+        "applyShaders": _vm.applyShaders,
+        "priceLine": _vm.priceLine,
+        "enableCrosshair": _vm.enableCrosshair,
+        "ignore_OHLC": _vm.ignore_OHLC,
+        "tv_id": _vm.tv_id,
+        "showTitleChartLegend": _vm.showTitleChartLegend,
+        "isOverlayCollapsed": _vm.isOverlayCollapsed,
+        "collpaseButton": _vm.collpaseButton
       },
       on: {
         "register-kb-listener": _vm.register_kb,
@@ -5309,12 +5338,12 @@ var Chartvue_type_template_id_ed8fb83a_render = function render() {
         "on-collapse-change": _vm.collapse_button_click
       }
     });
-  }), _vm._v(" "), _c("botbar", _vm._b({
+  }), _vm._v(" "), _c('botbar', _vm._b({
     attrs: {
-      shaders: _vm.shaders,
-      timezone: _vm.timezone
+      "shaders": _vm.shaders,
+      "timezone": _vm.timezone
     }
-  }, "botbar", _vm.botbar_props, false))], 2);
+  }, 'botbar', _vm.botbar_props, false))], 2);
 };
 var Chartvue_type_template_id_ed8fb83a_staticRenderFns = [];
 Chartvue_type_template_id_ed8fb83a_render._withStripped = true;
@@ -6995,34 +7024,34 @@ var CursorUpdater = /*#__PURE__*/function () {
 var Sectionvue_type_template_id_522d7934_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("div", {
+  return _c('div', [_c('div', {
     staticClass: "trading-vue-section"
-  }, [_c("chart-legend", {
+  }, [_c('chart-legend', {
     ref: "legend",
     attrs: {
-      values: _vm.section_values,
-      decimalPlace: _vm.decimalPlace,
-      legendDecimal: _vm.legendDecimal,
-      grid_id: _vm.grid_id,
-      common: _vm.legend_props,
-      meta_props: _vm.get_meta_props,
-      showTitleChartLegend: _vm.showTitleChartLegend,
-      isOverlayCollapsed: _vm.isOverlayCollapsed,
-      collpaseButton: _vm.collpaseButton
+      "values": _vm.section_values,
+      "decimalPlace": _vm.decimalPlace,
+      "legendDecimal": _vm.legendDecimal,
+      "grid_id": _vm.grid_id,
+      "common": _vm.legend_props,
+      "meta_props": _vm.get_meta_props,
+      "showTitleChartLegend": _vm.showTitleChartLegend,
+      "isOverlayCollapsed": _vm.isOverlayCollapsed,
+      "collpaseButton": _vm.collpaseButton
     },
     on: {
       "legend-button-click": _vm.button_click,
       "on-collapse-change": _vm.collapse_button_click
     }
-  }), _vm._v(" "), _c("grid", _vm._b({
+  }), _vm._v(" "), _c('grid', _vm._b({
     ref: "grid",
     attrs: {
-      grid_id: _vm.grid_id,
-      enableZoom: _vm.enableZoom,
-      decimalPlace: _vm.decimalPlace,
-      priceLine: _vm.priceLine,
-      enableCrosshair: _vm.enableCrosshair,
-      tv_id: _vm.tv_id
+      "grid_id": _vm.grid_id,
+      "enableZoom": _vm.enableZoom,
+      "decimalPlace": _vm.decimalPlace,
+      "priceLine": _vm.priceLine,
+      "enableCrosshair": _vm.enableCrosshair,
+      "tv_id": _vm.tv_id
     },
     on: {
       "register-kb-listener": _vm.register_kb,
@@ -7035,19 +7064,19 @@ var Sectionvue_type_template_id_522d7934_render = function render() {
       "sidebar-transform": _vm.sidebar_transform,
       "rezoom-range": _vm.rezoom_range
     }
-  }, "grid", _vm.grid_props, false)), _vm._v(" "), _c("sidebar", _vm._b({
-    ref: "sb-" + _vm.grid_id,
+  }, 'grid', _vm.grid_props, false)), _vm._v(" "), _c('sidebar', _vm._b({
+    ref: 'sb-' + _vm.grid_id,
     attrs: {
-      grid_id: _vm.grid_id,
-      rerender: _vm.rerender,
-      decimalPlace: _vm.decimalPlace,
-      applyShaders: _vm.applyShaders,
-      enableSideBarBoxValue: _vm.enableSideBarBoxValue
+      "grid_id": _vm.grid_id,
+      "rerender": _vm.rerender,
+      "decimalPlace": _vm.decimalPlace,
+      "applyShaders": _vm.applyShaders,
+      "enableSideBarBoxValue": _vm.enableSideBarBoxValue
     },
     on: {
       "sidebar-transform": _vm.sidebar_transform
     }
-  }, "sidebar", _vm.sidebar_props, false))], 1)]);
+  }, 'sidebar', _vm.sidebar_props, false))], 1)]);
 };
 var Sectionvue_type_template_id_522d7934_staticRenderFns = [];
 Sectionvue_type_template_id_522d7934_render._withStripped = true;
@@ -8133,17 +8162,17 @@ var KeyboardListener_component = normalizeComponent(
 var UxLayervue_type_template_id_15e2a3ac_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("span", {
+  return _c('span', {
     "class": "trading-vue-grid-ux-".concat(_vm.id),
     style: _vm.style
   }, _vm._l(_vm.uxs, function (ux) {
-    return _c("ux-wrapper", {
+    return _c('ux-wrapper', {
       key: ux.uuid,
       attrs: {
-        ux: ux,
-        updater: _vm.updater,
-        colors: _vm.colors,
-        config: _vm.config
+        "ux": ux,
+        "updater": _vm.updater,
+        "colors": _vm.colors,
+        "config": _vm.config
       },
       on: {
         "custom-event": _vm.on_custom_event
@@ -8160,33 +8189,33 @@ UxLayervue_type_template_id_15e2a3ac_render._withStripped = true;
 var UxWrappervue_type_template_id_5c211b12_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm.visible ? _c("div", {
+  return _vm.visible ? _c('div', {
     staticClass: "trading-vue-ux-wrapper",
     style: _vm.style,
     attrs: {
-      id: "tvjs-ux-wrapper-".concat(_vm.ux.uuid)
+      "id": "tvjs-ux-wrapper-".concat(_vm.ux.uuid)
     }
   }, [_c(_vm.ux.component, {
     tag: "component",
     attrs: {
-      ux: _vm.ux,
-      updater: _vm.updater,
-      wrapper: _vm.wrapper,
-      colors: _vm.colors
+      "ux": _vm.ux,
+      "updater": _vm.updater,
+      "wrapper": _vm.wrapper,
+      "colors": _vm.colors
     },
     on: {
       "custom-event": _vm.on_custom_event
     }
-  }), _vm._v(" "), _vm.ux.show_pin ? _c("div", {
+  }), _vm._v(" "), _vm.ux.show_pin ? _c('div', {
     staticClass: "tvjs-ux-wrapper-pin",
     style: _vm.pin_style
-  }) : _vm._e(), _vm._v(" "), _vm.ux.win_header !== false ? _c("div", {
+  }) : _vm._e(), _vm._v(" "), _vm.ux.win_header !== false ? _c('div', {
     staticClass: "tvjs-ux-wrapper-head"
-  }, [_c("div", {
+  }, [_c('div', {
     staticClass: "tvjs-ux-wrapper-close",
     style: _vm.btn_style,
     on: {
-      click: _vm.close
+      "click": _vm.close
     }
   }, [_vm._v("×")])]) : _vm._e()], 1) : _vm._e();
 };
@@ -9796,36 +9825,53 @@ var Price = /*#__PURE__*/function () {
       ctx.restore();
       ctx.restore();
       return;
-      var headlen = 15;
-      var angle = Math.atan2(toy - fromy, tox - fromx);
-      ctx.save();
-      ctx.strokeStyle = color;
+      // removed by dead control flow
+{ var headlen; }
+      // removed by dead control flow
+{ var angle; }
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
 
       //starting path of the arrow from the start square to the end square
       //and drawing the stroke
-      ctx.beginPath();
-      ctx.moveTo(fromx, fromy);
-      ctx.lineTo(tox, toy);
-      ctx.lineWidth = arrowWidth;
-      ctx.stroke();
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
 
       //starting a new path from the head of the arrow to one of the sides of
       //the point
-      ctx.beginPath();
-      ctx.moveTo(tox, toy);
-      ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 4), toy - headlen * Math.sin(angle - Math.PI / 4));
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
 
       //path from the side point of the arrow, to the other side point
-      ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 4), toy - headlen * Math.sin(angle + Math.PI / 4));
+      // removed by dead control flow
+{}
 
       //path from the side point back to the tip of the arrow, and then
       //again to the opposite side point
-      ctx.lineTo(tox, toy);
-      ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 4), toy - headlen * Math.sin(angle - Math.PI / 4));
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
 
       //draws the paths created above
-      ctx.stroke();
-      ctx.restore();
+      // removed by dead control flow
+{}
+      // removed by dead control flow
+{}
     }
   }]);
 }();
@@ -11960,134 +12006,134 @@ var Legendvue_type_template_id_ac4f0578_render = function render() {
   var _vm$common;
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "trading-vue-legend",
     style: _vm.calc_style
-  }, [_vm.grid_id === 0 && !_vm.showTitleChartLegend ? _c("div", {
+  }, [_vm.grid_id === 0 && !_vm.showTitleChartLegend ? _c('div', {
     staticClass: "trading-vue-ohlcv",
     style: {
-      "max-width": _vm.common.width + "px"
+      'max-width': _vm.common.width + 'px'
     }
   }, [(_vm$common = _vm.common) !== null && _vm$common !== void 0 && _vm$common.showLegendPropsData && _vm.common.showLegendPropsData.length ? [_vm._l(_vm.common.showLegendPropsData, function (n, i) {
-    return _c("b", {
+    return _c('b', {
       key: i
     }, [_vm._v(_vm._s(n.k) + " : " + _vm._s(n.v) + " ")]);
-  }), _c("br")] : _vm._e(), _vm._v(" "), _vm.show_CustomProps ? _vm._l(_vm.legendTxtConfig, function (n, i) {
-    return _c("span", {
+  }), _c('br')] : _vm._e(), _vm._v(" "), _vm.show_CustomProps ? _vm._l(_vm.legendTxtConfig, function (n, i) {
+    return _c('span', {
       key: i,
       style: n.style
     }, [_vm._v(_vm._s(n.name) + " ")]);
-  }) : _vm._e(), _vm._v(" "), !_vm.show_CustomProps ? _c("span", {
+  }) : _vm._e(), _vm._v(" "), !_vm.show_CustomProps ? _c('span', {
     staticClass: "t-vue-title",
     style: {
       color: _vm.common.colors.title
     }
-  }, [_vm._v("\n            " + _vm._s(_vm.common.title_txt) + "\n        ")]) : _vm._e(), _vm._v(" "), _c("span", {
+  }, [_vm._v("\n            " + _vm._s(_vm.common.title_txt) + "\n        ")]) : _vm._e(), _vm._v(" "), _c('span', {
     staticClass: "t-vue-exchange"
-  }, [_vm._v("\n            " + _vm._s(_vm.common.exchange_txt) + "\n        ")]), _vm._v(" "), _vm.show_values && !_vm.show_CustomProps ? _c("span", [_vm._v("\n            O"), _c("span", {
+  }, [_vm._v("\n            " + _vm._s(_vm.common.exchange_txt) + "\n        ")]), _vm._v(" "), _vm.show_values && !_vm.show_CustomProps ? _c('span', [_vm._v("\n            O"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[0]))]), _vm._v("\n            H"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[0]))]), _vm._v("\n            H"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[1]))]), _vm._v("\n            L"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[1]))]), _vm._v("\n            L"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[2]))]), _vm._v("\n            C"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[2]))]), _vm._v("\n            C"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[3]))]), _vm._v("\n            V"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[3]))]), _vm._v("\n            V"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[4]))])]) : _vm._e(), _vm._v(" "), !_vm.show_values ? _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[4]))])]) : _vm._e(), _vm._v(" "), !_vm.show_values ? _c('span', {
     staticClass: "t-vue-lspan",
     style: {
       color: _vm.common.colors.text
     }
-  }, [_vm._v("\n            " + _vm._s((_vm.common.meta.last || [])[4]) + "\n        ")]) : _vm._e(), _vm._v(" "), _vm.show_Settings ? _c("legend-button", {
+  }, [_vm._v("\n            " + _vm._s((_vm.common.meta.last || [])[4]) + "\n        ")]) : _vm._e(), _vm._v(" "), _vm.show_Settings ? _c('legend-button', {
     key: "main_chart_settings",
     attrs: {
-      id: "main_settings",
-      tv_id: _vm.grid_id,
-      ov_id: _vm.common.chartType,
-      grid_id: _vm.grid_id,
-      index: _vm.grid_id,
-      icon: _vm.settingIcon,
-      config: {
+      "id": "main_settings",
+      "tv_id": _vm.grid_id,
+      "ov_id": _vm.common.chartType,
+      "grid_id": _vm.grid_id,
+      "index": _vm.grid_id,
+      "icon": _vm.settingIcon,
+      "config": {
         L_BTN_SIZE: 21
       }
     },
     on: {
       "legend-button-click": _vm.button_click
     }
-  }) : _vm._e()], 2) : _vm._e(), _vm._v(" "), _vm.isButtonvisible && _vm.isOverlayCollapsed ? _c("button", {
+  }) : _vm._e()], 2) : _vm._e(), _vm._v(" "), _vm.isButtonvisible && _vm.isOverlayCollapsed ? _c('button', {
     staticClass: "p-button p-component p-button-sm collapse-btn",
     staticStyle: {
-      cursor: "pointer",
+      "cursor": "pointer",
       "pointer-events": "all"
     },
     attrs: {
-      type: "button"
+      "type": "button"
     },
     on: {
-      click: function click($event) {
+      "click": function click($event) {
         return _vm.collapse_button_click(false);
       }
     }
-  }, [_c("span", {
+  }, [_c('span', {
     staticClass: "pi pi-angle-down p-button-icon p-button-icon-left"
-  }), _vm._v(" "), _c("span", {
+  }), _vm._v(" "), _c('span', {
     staticClass: "p-button-label"
-  }, [_vm._v(_vm._s(this.indicators.length))])]) : _vm._e(), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(this.indicators.length))])]) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "trading-vue-legend-group"
   }, _vm._l(this.indicators, function (ind) {
-    return _vm.isIndicatorVisible ? _c("div", {
+    return _vm.isIndicatorVisible ? _c('div', {
       staticClass: "t-vue-ind"
-    }, [_c("span", {
+    }, [_c('span', {
       staticClass: "t-vue-iname"
-    }, [_vm._v(_vm._s(ind.name))]), _vm._v(" "), ind.showLegendButtons ? _c("button-group", {
+    }, [_vm._v(_vm._s(ind.name))]), _vm._v(" "), ind.showLegendButtons ? _c('button-group', {
       attrs: {
-        buttons: _vm.common.buttons,
-        config: _vm.common.config,
-        ov_id: ind.id,
-        grid_id: _vm.grid_id,
-        index: ind.index,
-        tv_id: _vm.common.tv_id,
-        display: ind.v
+        "buttons": _vm.common.buttons,
+        "config": _vm.common.config,
+        "ov_id": ind.id,
+        "grid_id": _vm.grid_id,
+        "index": ind.index,
+        "tv_id": _vm.common.tv_id,
+        "display": ind.v
       },
       on: {
         "legend-button-click": _vm.button_click
       }
-    }) : _vm._e(), _vm._v(" "), ind.v ? _c("span", {
+    }) : _vm._e(), _vm._v(" "), ind.v ? _c('span', {
       staticClass: "t-vue-ivalues"
     }, _vm._l(ind.values, function (v) {
-      return _vm.show_values ? _c("span", {
+      return _vm.show_values ? _c('span', {
         staticClass: "t-vue-lspan t-vue-ivalue",
         style: {
           color: v.color
         }
       }, [_vm._v("\n                    " + _vm._s(v.value) + "\n                ")]) : _vm._e();
-    }), 0) : _vm._e(), _vm._v(" "), ind.unk ? _c("span", {
+    }), 0) : _vm._e(), _vm._v(" "), ind.unk ? _c('span', {
       staticClass: "t-vue-unknown"
-    }, [_vm._v("\n                (Unknown type)\n            ")]) : _vm._e(), _vm._v(" "), _c("transition", {
+    }, [_vm._v("\n                (Unknown type)\n            ")]) : _vm._e(), _vm._v(" "), _c('transition', {
       attrs: {
-        name: "tvjs-appear"
+        "name": "tvjs-appear"
       }
-    }, [ind.loading ? _c("spinner", {
+    }, [ind.loading ? _c('spinner', {
       attrs: {
-        colors: _vm.common.colors
+        "colors": _vm.common.colors
       }
     }) : _vm._e()], 1)], 1) : _vm._e();
-  }), 0), _vm._v(" "), _vm.isButtonvisible && !_vm.isOverlayCollapsed ? _c("button", {
+  }), 0), _vm._v(" "), _vm.isButtonvisible && !_vm.isOverlayCollapsed ? _c('button', {
     staticClass: "p-button p-component p-button-sm collapse-btn",
     staticStyle: {
-      cursor: "pointer",
+      "cursor": "pointer",
       "pointer-events": "all"
     },
     attrs: {
-      type: "button"
+      "type": "button"
     },
     on: {
-      click: function click($event) {
+      "click": function click($event) {
         return _vm.collapse_button_click(true);
       }
     }
-  }, [_c("span", {
+  }, [_c('span', {
     staticClass: "pi pi-angle-up p-button-icon"
   })]) : _vm._e()]);
 };
@@ -12100,20 +12146,20 @@ Legendvue_type_template_id_ac4f0578_render._withStripped = true;
 var ButtonGroupvue_type_template_id_72b6dd45_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("span", {
+  return _c('span', {
     staticClass: "t-vue-lbtn-grp"
   }, _vm._l(_vm.buttons, function (b, i) {
-    return _c("legend-button", {
+    return _c('legend-button', {
       key: i,
       attrs: {
-        id: b.name || b,
-        tv_id: _vm.tv_id,
-        ov_id: _vm.ov_id,
-        grid_id: _vm.grid_id,
-        index: _vm.index,
-        display: _vm.display,
-        icon: b.icon,
-        config: _vm.config
+        "id": b.name || b,
+        "tv_id": _vm.tv_id,
+        "ov_id": _vm.ov_id,
+        "grid_id": _vm.grid_id,
+        "index": _vm.index,
+        "display": _vm.display,
+        "icon": b.icon,
+        "config": _vm.config
       },
       on: {
         "legend-button-click": _vm.button_click
@@ -12130,18 +12176,18 @@ ButtonGroupvue_type_template_id_72b6dd45_render._withStripped = true;
 var LegendButtonvue_type_template_id_7cd34a30_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("img", {
+  return _c('img', {
     staticClass: "t-vue-lbtn",
     style: {
-      width: _vm.config.L_BTN_SIZE + "px",
-      height: _vm.config.L_BTN_SIZE + "px"
+      width: _vm.config.L_BTN_SIZE + 'px',
+      height: _vm.config.L_BTN_SIZE + 'px'
     },
     attrs: {
-      id: _vm.uuid,
-      src: _vm.base64
+      "id": _vm.uuid,
+      "src": _vm.base64
     },
     on: {
-      click: _vm.onclick
+      "click": _vm.onclick
     }
   });
 };
@@ -12264,10 +12310,10 @@ var ButtonGroup_component = normalizeComponent(
 var Spinnervue_type_template_id_a6fff878_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "tvjs-spinner"
   }, _vm._l(4, function (i) {
-    return _c("div", {
+    return _c('div', {
       key: i,
       style: {
         background: _vm.colors.text
@@ -14065,15 +14111,15 @@ var Chart_component = normalizeComponent(
 var TheTipvue_type_template_id_1be6bf21_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "tvjs-the-tip",
     style: _vm.style,
     domProps: {
-      innerHTML: _vm._s(_vm.data.text)
+      "innerHTML": _vm._s(_vm.data.text)
     },
     on: {
-      mousedown: function mousedown($event) {
-        return _vm.$emit("remove-me");
+      "mousedown": function mousedown($event) {
+        return _vm.$emit('remove-me');
       }
     }
   });
@@ -14128,52 +14174,54 @@ var TheTip_component = normalizeComponent(
 )
 
 /* harmony default export */ const TheTip = (TheTip_component.exports);
-;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/TitleLegend.vue?vue&type=template&id=6a384e60
-var TitleLegendvue_type_template_id_6a384e60_render = function render() {
+;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/TitleLegend.vue?vue&type=template&id=eceea3b6
+var TitleLegendvue_type_template_id_eceea3b6_render = function render() {
   var _vm$common;
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "trading-vue-legend title-legend"
-  }, [_vm.grid_id === 0 ? _c("div", {
+  }, [_vm.grid_id === 0 ? _c('div', {
     staticClass: "trading-vue-ohlcv"
   }, [(_vm$common = _vm.common) !== null && _vm$common !== void 0 && _vm$common.showLegendPropsData && _vm.common.showLegendPropsData.length ? [_vm._l(_vm.common.showLegendPropsData, function (n, i) {
-    return _c("b", {
+    return _c('b', {
       key: i
     }, [_vm._v(_vm._s(n.k) + " : " + _vm._s(n.v) + " ")]);
-  }), _c("br")] : _vm._e(), _vm._v(" "), _vm.show_CustomProps ? _vm._l(_vm.legendTxtConfig, function (n, i) {
-    return _c("span", {
+  }), _c('br')] : _vm._e(), _vm._v(" "), _vm.show_CustomProps ? _vm._l(_vm.legendTxtConfig, function (n, i) {
+    return _c('span', {
       key: i,
       style: n.style
     }, [_vm._v(_vm._s(n.name) + " ")]);
-  }) : _vm._e(), _vm._v(" "), !_vm.show_CustomProps ? _c("span", {
+  }) : _vm._e(), _vm._v(" "), !_vm.show_CustomProps ? _c('span', {
     staticClass: "t-vue-title",
     style: {
       color: _vm.common.colors.title
     }
-  }, [_vm._v("\n            " + _vm._s(_vm.common.title_txt) + "\n        ")]) : _vm._e(), _vm._v(" "), !_vm.show_CustomProps ? _c("span", {
+  }, [_vm._v("\n            " + _vm._s(_vm.common.title_txt) + "\n        ")]) : _vm._e(), _vm._v(" "), !_vm.show_CustomProps ? _c('span', {
     staticClass: "t-vue-exchange"
-  }, [_vm._v("\n            " + _vm._s(_vm.common.exchange_txt) + "\n        ")]) : _vm._e(), _vm._v(" "), _vm.show_values && !_vm.show_CustomProps ? _c("span", [_vm._v("\n            O"), _c("span", {
+  }, [_vm._v("\n            " + _vm._s(_vm.common.exchange_txt) + "\n        ")]) : _vm._e(), _vm._v(" "), _vm.show_values && !_vm.show_CustomProps ? _c('span', [_vm._v("\n            O"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[0]))]), _vm._v("\n            H"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[0]))]), _vm._v("\n            H"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[1]))]), _vm._v("\n            L"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[1]))]), _vm._v("\n            L"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[2]))]), _vm._v("\n            C"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[2]))]), _vm._v("\n            C"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[3]))]), _vm._v("\n            V"), _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[3]))]), _vm._v("\n            V"), _c('span', {
     staticClass: "t-vue-lspan"
-  }, [_vm._v(_vm._s(_vm.ohlcv[4]))])]) : _vm._e(), _vm._v(" "), !_vm.show_values ? _c("span", {
+  }, [_vm._v(_vm._s(_vm.ohlcv[4]))]), _vm._v(" "), _c('span', {
+    staticClass: "t-vue-lspan"
+  }, [_vm._v(_vm._s(_vm.ohlcv[5]))])]) : _vm._e(), _vm._v(" "), !_vm.show_values ? _c('span', {
     staticClass: "t-vue-lspan",
     style: {
       color: _vm.common.colors.text
     }
   }, [_vm._v("\n            " + _vm._s((_vm.common.meta.last || [])[4]) + "\n        ")]) : _vm._e()], 2) : _vm._e()]);
 };
-var TitleLegendvue_type_template_id_6a384e60_staticRenderFns = [];
-TitleLegendvue_type_template_id_6a384e60_render._withStripped = true;
+var TitleLegendvue_type_template_id_eceea3b6_staticRenderFns = [];
+TitleLegendvue_type_template_id_eceea3b6_render._withStripped = true;
 
-;// ./src/components/TitleLegend.vue?vue&type=template&id=6a384e60
+;// ./src/components/TitleLegend.vue?vue&type=template&id=eceea3b6
 
 ;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/TitleLegend.vue?vue&type=script&lang=js
 /* harmony default export */ const TitleLegendvue_type_script_lang_js = ({
@@ -14205,9 +14253,9 @@ TitleLegendvue_type_template_id_6a384e60_render._withStripped = true;
         });
       }
       if (this.$props.legendDecimal) {
-        return [this.$props.values.ohlcv[1].toFixed(this.$props.values.ohlcv[1] < 1 ? 3 : 2), this.$props.values.ohlcv[2].toFixed(this.$props.values.ohlcv[2] < 1 ? 3 : 2), this.$props.values.ohlcv[3].toFixed(this.$props.values.ohlcv[3] < 1 ? 3 : 2), this.$props.values.ohlcv[4].toFixed(this.$props.values.ohlcv[4] < 1 ? 3 : 2), this.$props.values.ohlcv[5] ? Number(this.$props.values.ohlcv[5].toFixed(0)).toLocaleString('en-AU') : 'n/a'];
+        return [this.$props.values.ohlcv[1].toFixed(this.$props.values.ohlcv[1] < 1 ? 3 : 2), this.$props.values.ohlcv[2].toFixed(this.$props.values.ohlcv[2] < 1 ? 3 : 2), this.$props.values.ohlcv[3].toFixed(this.$props.values.ohlcv[3] < 1 ? 3 : 2), this.$props.values.ohlcv[4].toFixed(this.$props.values.ohlcv[4] < 1 ? 3 : 2), this.$props.values.ohlcv[5] ? Number(this.$props.values.ohlcv[5].toFixed(0)).toLocaleString('en-AU') : 'n/a', this.$props.values.ohlcv[8] ? '(' + Number(this.$props.values.ohlcv[8].toFixed(2)).toLocaleString('en-AU') + '%)' : ''];
       } else {
-        return [this.$props.values.ohlcv[1].toFixed(prec), this.$props.values.ohlcv[2].toFixed(prec), this.$props.values.ohlcv[3].toFixed(prec), this.$props.values.ohlcv[4].toFixed(prec), this.$props.values.ohlcv[5] ? Number(this.$props.values.ohlcv[5].toFixed(0)).toLocaleString('en-AU') : 'n/a'];
+        return [this.$props.values.ohlcv[1].toFixed(prec), this.$props.values.ohlcv[2].toFixed(prec), this.$props.values.ohlcv[3].toFixed(prec), this.$props.values.ohlcv[4].toFixed(prec), this.$props.values.ohlcv[5] ? Number(this.$props.values.ohlcv[5].toFixed(0)).toLocaleString('en-AU') : 'n/a', this.$props.values.ohlcv[8] ? '(' + Number(this.$props.values.ohlcv[8].toFixed(2)).toLocaleString('en-AU') + '%)' : ''];
       }
     },
     main_type: function main_type() {
@@ -14223,9 +14271,9 @@ TitleLegendvue_type_template_id_6a384e60_render._withStripped = true;
 });
 ;// ./src/components/TitleLegend.vue?vue&type=script&lang=js
  /* harmony default export */ const components_TitleLegendvue_type_script_lang_js = (TitleLegendvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/TitleLegend.vue?vue&type=style&index=0&id=6a384e60&prod&lang=css
-var TitleLegendvue_type_style_index_0_id_6a384e60_prod_lang_css = __webpack_require__(229);
-;// ./src/components/TitleLegend.vue?vue&type=style&index=0&id=6a384e60&prod&lang=css
+// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/TitleLegend.vue?vue&type=style&index=0&id=eceea3b6&prod&lang=css
+var TitleLegendvue_type_style_index_0_id_eceea3b6_prod_lang_css = __webpack_require__(574);
+;// ./src/components/TitleLegend.vue?vue&type=style&index=0&id=eceea3b6&prod&lang=css
 
 ;// ./src/components/TitleLegend.vue
 
@@ -14238,8 +14286,8 @@ var TitleLegendvue_type_style_index_0_id_6a384e60_prod_lang_css = __webpack_requ
 
 var TitleLegend_component = normalizeComponent(
   components_TitleLegendvue_type_script_lang_js,
-  TitleLegendvue_type_template_id_6a384e60_render,
-  TitleLegendvue_type_template_id_6a384e60_staticRenderFns,
+  TitleLegendvue_type_template_id_eceea3b6_render,
+  TitleLegendvue_type_template_id_eceea3b6_staticRenderFns,
   false,
   null,
   null,
@@ -14252,20 +14300,20 @@ var TitleLegend_component = normalizeComponent(
 var Toolbarvue_type_template_id_320099a6_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     key: _vm.tool_count,
     staticClass: "trading-vue-toolbar",
     style: _vm.styles
   }, _vm._l(_vm.groups, function (tool, i) {
-    return tool.icon && !tool.hidden ? _c("toolbar-item", {
+    return tool.icon && !tool.hidden ? _c('toolbar-item', {
       key: i,
       attrs: {
-        data: tool,
-        subs: _vm.sub_map,
-        dc: _vm.data,
-        config: _vm.config,
-        colors: _vm.colors,
-        selected: _vm.is_selected(tool)
+        "data": tool,
+        "subs": _vm.sub_map,
+        "dc": _vm.data,
+        "config": _vm.config,
+        "colors": _vm.colors,
+        "selected": _vm.is_selected(tool)
       },
       on: {
         "item-selected": _vm.selected
@@ -14282,37 +14330,37 @@ Toolbarvue_type_template_id_320099a6_render._withStripped = true;
 var ToolbarItemvue_type_template_id_5ce1aaa3_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    "class": ["trading-vue-tbitem", _vm.selected ? "selected-item" : ""],
+  return _c('div', {
+    "class": ['trading-vue-tbitem', _vm.selected ? 'selected-item' : ''],
     style: _vm.item_style,
     on: {
-      click: function click($event) {
-        return _vm.emit_selected("click");
+      "click": function click($event) {
+        return _vm.emit_selected('click');
       },
-      mousedown: _vm.mousedown,
-      touchstart: _vm.mousedown,
-      touchend: function touchend($event) {
-        return _vm.emit_selected("touch");
+      "mousedown": _vm.mousedown,
+      "touchstart": _vm.mousedown,
+      "touchend": function touchend($event) {
+        return _vm.emit_selected('touch');
       }
     }
-  }, [_c("div", {
+  }, [_c('div', {
     staticClass: "trading-vue-tbicon tvjs-pixelated",
     style: _vm.icon_style
-  }), _vm._v(" "), _vm.data.group ? _c("div", {
+  }), _vm._v(" "), _vm.data.group ? _c('div', {
     staticClass: "trading-vue-tbitem-exp",
     style: _vm.exp_style,
     on: {
-      click: _vm.exp_click,
-      mousedown: _vm.expmousedown,
-      mouseover: _vm.expmouseover,
-      mouseleave: _vm.expmouseleave
+      "click": _vm.exp_click,
+      "mousedown": _vm.expmousedown,
+      "mouseover": _vm.expmouseover,
+      "mouseleave": _vm.expmouseleave
     }
-  }, [_vm._v("\n        ᐳ\n    ")]) : _vm._e(), _vm._v(" "), _vm.show_exp_list ? _c("item-list", {
+  }, [_vm._v("\n        ᐳ\n    ")]) : _vm._e(), _vm._v(" "), _vm.show_exp_list ? _c('item-list', {
     attrs: {
-      config: _vm.config,
-      items: _vm.data.items,
-      colors: _vm.colors,
-      dc: _vm.dc
+      "config": _vm.config,
+      "items": _vm.data.items,
+      "colors": _vm.colors,
+      "dc": _vm.dc
     },
     on: {
       "close-list": _vm.close_list,
@@ -14329,25 +14377,25 @@ ToolbarItemvue_type_template_id_5ce1aaa3_render._withStripped = true;
 var ItemListvue_type_template_id_75847764_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "tvjs-item-list",
     style: _vm.list_style(),
     on: {
-      mousedown: _vm.thismousedown
+      "mousedown": _vm.thismousedown
     }
   }, _vm._l(_vm.items, function (item) {
-    return !item.hidden ? _c("div", {
+    return !item.hidden ? _c('div', {
       "class": _vm.item_class(item),
       style: _vm.item_style(item),
       on: {
-        click: function click(e) {
+        "click": function click(e) {
           return _vm.item_click(e, item);
         }
       }
-    }, [_c("div", {
+    }, [_c('div', {
       staticClass: "trading-vue-tbicon tvjs-pixelated",
       style: _vm.icon_style(item)
-    }), _vm._v(" "), _c("div", [_vm._v(_vm._s(item.type))])]) : _vm._e();
+    }), _vm._v(" "), _c('div', [_vm._v(_vm._s(item.type))])]) : _vm._e();
   }), 0);
 };
 var ItemListvue_type_template_id_75847764_staticRenderFns = [];
@@ -14735,22 +14783,22 @@ var Toolbar_component = normalizeComponent(
 var Widgetsvue_type_template_id_296e303a_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
+  return _c('div', {
     staticClass: "tvjs-widgets",
     style: {
-      width: _vm.width + "px",
-      height: _vm.height + "px"
+      width: _vm.width + 'px',
+      height: _vm.height + 'px'
     }
   }, _vm._l(Object.keys(_vm.map), function (id) {
     return _c(_vm.initw(id), {
       key: id,
       tag: "component",
       attrs: {
-        id: id,
-        main: _vm.map[id].ctrl,
-        data: _vm.map[id].data,
-        tv: _vm.tv,
-        dc: _vm.dc
+        "id": id,
+        "main": _vm.map[id].ctrl,
+        "data": _vm.map[id].data,
+        "tv": _vm.tv,
+        "dc": _vm.dc
       }
     });
   }), 1);
@@ -15604,7 +15652,7 @@ function _asyncToGenerator(n) {
 var regenerator = __webpack_require__(756);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 ;// ./src/helpers/tmp/ww$$$.json
-const ww$$$_namespaceObject = /*#__PURE__*/JSON.parse('["PQKghABAYg9gThANgSwMYFMB2BndFmYBm8AtgIYAuyMmEADoumbhLntqnMnRQPoDu/AHT94Aa3RwhAK2xCAMgEkAwgFEAcgGVVQigA8KEEMABQACjMBKALwA+AN4A3MggrX7ANgBMALjcOKIXQ9OngKbHdMAFcSVBI6H0IozFQqGjMKABp0S3s4dAoouFoKAFp0AF9M7Ao4OISklLTMDOzc/MLiiAoAHnQAflKARj9bAZGABgrpzIB2ABYfVvRMzBsHZwQ4axaAZgBOD0tM5B2zb2OyM4AOBcsAbkbU6lpsZdzkQjMwKWRsTTCZAARowAIJwOBkACe8mQEgylksFAAFnAYPwIJh0BjVBD4GYAESKTDOFAAEwgZMoZAJD0+33QAB9GYFGJgAOYo2wTABkPLAZjwBG6AG0JgBdREotEYrE4vFwQnE0nICkEMnBWn3FF/IRUihXLI6uTq4LWFbGoS4CgAIRgySpXHQb2OltQMHiLnQ1gJ0RIQMkBOs1goULo6BghG6yN1JAIjn6yCEfvqPiTNTq8UyltwLlQyOsZCtTDqyOzMbkpNCEXsVTdRWw8B2UUQiHLuqxBkQ6Obrfbck7OvZBeirYqgWCoTg4Ws2GqQjoaIoMFD4eLFGUHroXusT2aCPs9IJe5eBLAIbDEajFCRqPRmOxEFxaMVRJJZHJEBc7JiWAoWo6IoSgrIR3U9fIQ37Ko5EXFcV0vddNBLfNd2SZ50hvQ8vmPNDmjPC9w0jbpbxlB95RfJV30/b9f0wf8HkAroc2QgsjQraCFyXeC10badUKaF4rCcFxuhDCtsjE3VTT0e5GOA3V9SLXiKAsE90kwTI4HaAogO6UCty9MxMBFdBxU0kzJQqRF+3XO0HRcZBnSsKD51g5dV3QWz7UwR1HIiNSWlyTZRMtRSJMtaTZJ0piQLjEkQyENlOWRPkKDFcULJs8g9EcBKkpRVKRVZLBkuGDLTJcmCuI8oRCAKFCAoPekJmDSS5EUxKSpRSw5OjXVUAbJtRzbS1B27fhexGkDBxjYdJv7e56WGVq3QM/JWktOLHERXr6zgXj5tG4IKHGw7puO2aCwmBb6SGFaQLA7d1rY2MyBynbovkuQBv2oaWymjtjtO0LqU6jkUWGGyZuQObhoW4LvUtKsYGwIrxUWr4cl6zziAdfoMgewbtk86SoaBns4aOgxLsmywlj2g7KfOrse08xd0EcMnqZhgtPMHV0K3uYLMDa4s82RUCP0QAm/mzBjPr676iZ2IRSapk6Kc4jmuaHEdk2OyrOLgmr2QKfj0JaTCKFSkC6oofMESFkTEcJ364CizpaGG89zX6EGDQsnxho4tzuM802KAAJTIDlvUarIciwsw7uDVbwPQd4es+kV0ctO2HZvJ2EBFhn4GZdXLu1W36uRQUHmC7ZS7gcvmY1/gPd04bWswZku+DOB+hzvwQI67AUAwIzNIAaiGSwZluRZ/HsAKIAzrINLgE5MjIIKRIiOAp8wWxj6GTIYFFx7DLS7AMoinzgjM5B5c9iAYH6I/rAHsgRWQcV3FxnyPgwCn2kkHf6mR2aOB8DAHoEx+hwB8HASGg5oGwPgTPRBFRoHcn6J5VAUsZZznXtUSGyBt50zwQQ402Zqgz00lvHePhv6/3/t5MkQDrqgLnJAsBfYUHB3HEEEIYQ5C5lLObfcmFhai0Uh3LolDWyENWJka6mAwalVPi9SsH5qxzyqAcDwfg7D2AnMI6cJp/iAhBOgcEkIYRwjjrhQSmFerx20p7MAAprY8gJDAIE0h0CpCDARK83Q+R/CgAQZAFA17qO6qlOJyJbDWF5DyYq4MCzBgALKUAloQbs+J0nJUsAk/KyIejzC8PseYhxZhVKOBUBEfI3F5E+gKMAFBmS+P8YE/854PJEU6YyHCAkaD4QGdeK0YQ54IhmB4XYux6bZFWOsYSWwzizF2NcSwep0CEDIC2CgjwnE0HwEJAkUQWAZjQP+bUQipwzlOI1dxnc6z3JEUIXgvBnRZJgGSFs3owDXVMQ89qeyDmIDcCCkRRdV6rHcFUK4AB5HpqQjbuUvNUQsQhkTMCRfwTAAAFNE4ZpxQjPtYFFAS0UakIAQdAxKYCktDMyeOyy1gmIsirUkURKiZCiD6AKwSJkQE0FCf0MBED9DFRKxAPhayZALFEVWMTITLmbsMgAApq6JkhKDwAJJkVA1hlXMChCkRQqr9UaoJNqs1FqrXqsNYgE1ugYCaFqAQdkAAVMg7IunauXB6rgHJfXsgJMc0ZtAvgJxWa0l+VLem7LpViRlzKoTLEyMJRAvKg7ZD9Hq6xHCjU0DpT+SERagWZH4FwA0lapiugsuOOAUJl5mAVQSWkFR8H21ronQgEjnHspeUxLlmBpgr14Jmjeu8ECnHQHyNm1VLz4BwAaFIoSxC4J8GIbelLUWBE4EwGJZgkyhw8scCIcoIDyDMBqnOz9dIwDMGQTIBJeDxhgBIQ12bc2qFaBpbAc9LgVBXmSaduRaitrkiYy8PhfSkA/Ia78fhJaKJWGsaYPaC4jswLB8M8HpTomQ3AdkfhpgVDUTWsgdBrC8FhblAk2BLnhnvmSD1Lh/wQJ9Mx7ArGNRkgAJqOUQGSQ1UIfTBECVEKgHJDUkB9I9RgMSxOZHZAiyNFsIBiCEqBk5tAgS6ZXvwXTwU9Aaa+HoRVmQzDPPjbpY0Vl64iSyfu6lgQI6MoxeGJFhBMigmsFkvkWSzAhYACJmAfYie4oI+Sgh9mQPk30CGgkVSUnkZhzOgmcwgJF1hhDnsvNYMQ6Kw5uaTUeygGc9APBXpoA8IpfTHUNQSIj/AWtyQJOKWq8BVBkAdrZ/Tdc22xsG1Gg8u0QIfpJF+jOFpgMLb01GiA6h3jL305iU928z78tnRAAs4G0q/xoTvDGhI2v4WsBLC9ayIDGolt+TILrUBCB5egORtBEB8m6e54JipEDpeS4ots77eBkH4GQaJtJcFCHyI2RAjgM6IE+WDiH0SdkoiwKpIbmEWhNYMIarIMBdtWRsy0vHF2aHE6iAtnwnk4eSsR2YAHuhkRY7GxbA8L23uQWfagYDZOce4c261u87Wqck8RBUKIZgHukbnsFZA9xn3UPfZ+79Wa3uJBx5pXIK8yBCV6tejOHP9wrCfvYS29DzeLd6qcZAiZWdY9fYwg3ei54r3/cQrSt3TiOA+xARqr6gNJ1OMGKEJF7zPnxASAA4lgPV6r8DYC/IgfIZAyRQggHAZImAvVanpGH6wJAPjYQu61HebXWAfd/egOnmQyQ0Dr0Cid+IpAkAKMiP5hZNJCG/LOe49w9vnykBqRg7IqtnZgHtgV3qzDE60mdmnScBXBnZJYd0dECC8oD1EaYR5BzBM/kIDvKI/k9WLHRY/vBcBX6kN+e46BEAsCPOX/uJ/O/n9D61baVfTgkF7wf1Hz+G3F7VUD0AwB4EEnv3lwqCf1wAJE61anb0/zJD5HvyBBzx4EJE60APl0WmsChFhQOwA11zOwQzgHIEQCP2u0vFL1PWP0byxH6BIB8DoEVT71I1anX031kx3xgy1zl3ZAbyb0QT1Cb2mFFxlBoN0EvD5AYIAJQLPzJB9EpxgPUyEL0SWy0zn3Xj222DUVPy7zJBOASl1TVXgBFDgHRkL1aixgVjUTH3QAnxiXmikOI2QISXMOtVh0+nkMMNQJ9FwLUX7xWF0JWTfTfxViMPPy6U6x9jgH8I/2UNULF0NRCK4OvW9UvGj1fG9TZ3wEdXgEpBgGdExBXHoDREcFVDwDIAgAAHICQp4D4CR6iIAYixNrJ2RYUrhwMyFAhvD1VVhOD19yCoiiwL0jdkjjDUjpDhj+8ixHtHCn9nCqt5pujgoIhFjSMA9sB+h2om98ZjJAg4dDl1AyAO8/5tEc0MN9YDAEpBx5AYBUA314jgwAjlCkiOifRD95iuCchhinCXDvQ4Z18fBsAlgPiZj3DxcMj1MsiciFRCRBjijTjIVk9yjDAY5X4D1aRASVjgT1iPcNtFADwEZ3AoMnjUA/B0oKh7ghhV0wkMtKFe0qSQwRQhhJRMgvBGTvFBRaoCApYYRnj2SvAzJPIyBCBVU2S0pdguTLQoNVA6InQYJLk+1iTltpAyTnYEolMCgXhmRaxH9ZDwwfjENqCG8ViYlV4Rjsx9J4hlMXhzRtDmgb0DwFSW0lTPVnRrARQTEW0qT4M0QVwCQKgzJAhiA4A+sHZFB+wBZdQ4cChvgJgNStMItMJ6QhlO0Vo9sS4RRkQbCvg1gpj8FFFC4jwhVU5LxBk7ibxdozswA/hzjVsiluo9tThIYrgV5Apl58R7gp4p5kAehWzkQh96QgdpYsgn4s4X41EecjszJHCm9rBgFVgA85yPxeVzRATlyq1x0A8ixBxCxpgq8ETwxci70EQp4CQMTMAKjvDrEu1eogRSsPJ8sz4zAkU31N8MwohUgDVNdNy69+AS0iAYYihgRGAOFSdn0QKCQfzag/ynVAKbifAgRQKy0IL61ScXyyQQDEBoRziO9dwzAQKQd48sQLC4AoB9M8S1E/gKLE94AaKo1B0MI9tvQRkLZhVqzrwEkEKc9/z3Y5JPEF1mTWogQulGKqKWLuLWp+S8K+MCKoQiKmRGQ+YLicg55hjyA4AxA2LLZhdE00VrQvMw5fN+hjLAhTLl0fMY1q06YMgUdQ4vl3z7LyKE8ZLaLrJAhCtTSrLQJ08T0kVXQqgQjqNaMWkYMvlwdIcKByMqh6t1BXy6DMgvhkq/KVgXjTdBJhdHNrI1FQRsBzVUBLUmLth1B5jiqUgDLM1N4yEd4nAYBVQIAWpgxEsMsrhGU4xcActWAdhHxVsp1Y16rLhH0uh6LsBpLrVZKzdLB9jwTayrAncWgcr2L7MmJxDmDAgtcBxjorAnNErPzjgvgvyPLKLrU8TTrrM1qezJs/gnM0rPzIj3VPU5NBdxtcMCQRQ/F3MIBpr1VxRQyCqhAJAoR/IhdbtvQrKER4Uc5Hh8QG5GScg1E6A1S71xqvZfDEd9oM4TqNsVI9c+y1Eykh9bsDCFwmUrAzs51aB7CX4dqgLP47SmDAVNEKhdotrAVgUZgNybiIgwtMh5AUrTT7ABKkL4AfB5BNJnQChtdxsMyY0QJIEUkdZVbmIr9LQb8/xtzQpdzNER4CS1imZYxAj8cuNLRQibJFTlS/Iesoz+ta5pBjgOlLBIyzBhZeSKxLBWsj81F8wXBQQVIUyks0NJzxI1g+RGzsBmyzBD4rRx4M5Z50tCERRMA/4choJlwGghtIMR5dyJhYUoUQIbbvTUYJR7SGB9SaAxi0iVoTScgq9AggCFZLQ4BSQqhFLQD8xwDIDmh5bOdFbCEubI8MQjlpFjRNNXTFRRqNraAYAG7ZjiMz4RjII1Ejz6qvizbfi4TzQXbGzQNEaRJTgPSoQvSVTElhhFpklC7ShSgLdgpDQS7PTbbnQf4zJz4iw9TmhyDgz/wK9dAAzniZzdJXwsBOizsJigHUAehRZIEZ9Zww6X1vzKB8wqS8SCwJzkHjxBTWxhTUAC8vgog+RkR6DLRIEegv7UHkQqSQGuhFQqHWTnjMggU6QlbdQKGiwU0hTaHeoGGBTMAeHgG4Dn8hQiGyHlb8hHBKHJYmH+c+GX1ZG0HmHWGRHcAk4wBSGq8LzWsW1WADQYkO86IIB+Boku8ZM7tqHX4EBuG8HCHh7OGBGhH5GFZ+HbHEB8GtDEVMCogeAB7JE2hezFQJ7n6z7X65Aykr6P5b7SgOUG5RZS6VS07Cy71AH8HYHyGpHQ7SzpZN4cHBG8H0H0tMmOYegpB3HPHfdP57hMCmAxB995CCRamyAxAj8szeDt90A2n0skxKTnjYGxL0BYGkwKmqT5DThho+qrgHckxv6Xh5U6TeoJiisshtj1Nzd8ZNpt7ms1aRncGPGqS1M6Y04q6T0d4qhv6682VE5X867U4G7R69IW7PYmn09Wn66PIukOnogumPnLw/ZW4EoUNEDPo2mG7NmQJ26PxRZ+9m7SMsozbcD1ZJMfJaR4M7zKCkM/nwxF15DkWAT2QqgU0/hkR/HnEibgmdTT7z67bImhhH8b77g77E4QndREm/ILIzs1FRmRTU46GvpK7lMM5/atxHSaB5ipTJBaHMgtS1g1MZhsNSWWl3byTqXwnL76X0BGXmXcyEmX6y7OX6Q1E+njU+XyaVY5ma7bnpDkCHmqn1D7hZW547cTyxcnwkSCRkBWxVjEBLHe0vwKBDGeAu1LTx8qthMn92E2UZ057FZdkw3XDDwiiEF0zjg0SKBVK81HjnjME31D97pTbPiMtLb/jjhCWwrBFJwRFrB+j3lzEUcfk/kAUVzgU63whk0IUoU23sAqhNlrgjEHAV5hW8ru3zRBVaKqzCIowZUgRJVvtirZUeKp3RVxVZ3kcUSB4orW7eLugsEt2GbvtKyQkiIZ2520l9I11BL1VWpT2vs0kfZb2RaBgmNV3JUCQ/Ad2KA3kq362vlG3/lGAW27Sf323aVO2EoQO5xh3K2zEZwLRu2G3sBfkAPubgPYOwV9lDkIP0Pe2ABWQxCDYxeJloeZXYSwam6FcxapqDVpU2C69VSOZIKgYiuAbtahg8H7XpJd0JdkbsIED8fIv4foXjvxATyF5wzy61RjrfFjnwWawSRAjrCT+j+AaT5jvAawbPWkDGijCSI07sjGqp9AKwlJxwZqikCYH2J+O3btno80Ez9wSDhZxZ1ukz5BosSDiIjznD9ekMIjqlhJP9pDptxgfGdYQIMDw5JYcL9cvUQULNMgOnUnPlRw6wd4YxFVkSWm1eSwNRZ9FYLSKOvL1oQrnkAK2lelNNSQUMErrNLAX8CtKCqtCOOnEzqyMKoQc+dL2wAKzKnFPFAlKrslJBhOY4CwVZC5K5T1IJKel4boNbIyf6YMNSrVkclOxGRJWrI+4uVW7YWxaEOue4TAPoI7gcnqZJ9k9OgPVjod+LjlekG57Ca5OTSd0JemhzO7vq7YWsN1YNL1JBnIBOtADOa4TIYYTGgkKyo/RInkPBGgX8oS+Q4mC9hH9VZMTS44AkHJOgaHrpJCf+/ufofbqEWqNEEgOueDcEH8Ix8IXHxkYAAAPTMH6B8AAFVkBGRFBcuVIWfrhGQhgPBGRdgvByOWflACL4h0AyR5rieAASYAXQZ0FSLSP2T7nwMzlqqYF0ubxUDlVxIbR7swYn1WbAYnuufl+bzOoySwVlSGo8B0PZelMTfpHd29vkb2dkx9jd8UXuf6fpRrbVDdrrC343wgMn2Za35kYd23z6kxN1s89AHR5UD8FqygINwwZcVgdmDPcozAe+q1axVdGoGODAIQAAHUwGJGsY1FcBgAgADEKMLUYEyFz9KBcDsRxPcxTxIEuUMFxURy/AgBFC9+TfFCsHaNQKEC7QOpXmQAA2FxaXpGN7+DN5vAt6/YRBj8HsCekT7goHfn+ngwd5TSl/GVd9fbvbShH/Kp95ZAD51WTa6y5b952H0IYWqApRzn5SA4LGAW1BbSThXAjIFrKhIiFrIqI7C9BGGmsB9jFlPo9wAVMAjUZ4B3a9wAUAKjvTYocm1vHZKzRToL00a2AWuFIDezHAF6ZSH2DkAQEtsHgbHXtAeF/6cIQwoGfZq2ho70gwAxDHkB7zURyR5CV6Xwp7Gcgw0gMPsIDPyxYEFMPGScLRm62QDTBeoMAaYPPyj4qDGQdmU8o+GyLnkPWyfaiIG3QDxAM+dfDUKjyKB4A7yefB8owCL7rpS+FfKvvABr7dA6+DfawSsFb7t9oQnfXpN31777YyAA/OosPwv4qob+4/DolPxmSplXSBuWNBvHf4h4aOwUc+GlDIBj8gM3/Bem9joE4ZY2GvCkIZQqAL1WauCMwDTh8DdU/g9OZ0Izgzg04Vqd6E4DELm5vAXECsOzKqwjqFhSMtEcIOuUfBVDcA2OcbLPU2JAs6ADADNBhlqwbYVcuQA3HOHqo7YogebHZjeG16nIZcmERYfQjITU5IiaROWMUI9rmdWqi2TYfPTWwcCMgtgkvm9ylDx8tBiJCiASGUAxw7yhgHJoP1QAEVsAKeZgIPyFQtCthE2BWAKi4p4RXuJ7C/vOwv7ccYRsqMIVRX6D7sHMn7PdpDV2iHsJ2x7adrCPPbi0hKN7AkRQAfahDMq/QF9ouw/bLsv2/KWZCvFrhSIdS1zegpxyCTnhthNvRkK7XrIT0QhSI5cMSmQBxgqAiOUzmcMs7vF9CIAsstkC6SRdIU9jDkX0hNQY0Le7sTQRiG0GJ8PWgaGACKLFHIAB+PfGoNngVh1FFwoo6JCaLwBvYohHNT6ISGe7ho7C0qN6mRnUAxAAwWkCPlkCYyeiAIoLBdmu2CQy4cg26dANeVDIrxUAa2TLjt0LrHdPIpNTAGd3NbGcruUgerh3ka7egcxBafMcyFXJSBN8mFfMUBwJBvZPWtAGHqkxrTRJIK3NY4OV0d6poSU1XDNFkGIGg10AEeXXBOg2yTlh0sbMSvGN8q2UVgAJTAHyAnERE2xJ/IbjVwDGZUf0jYutE1yGCk4v2wUAdC0FmD4djgvAFWC0EICzDls4GSDAAOChuAwAdoSVEwFRpTjXsQFXzEg0jh7JGAaKIkSpAfGMAY4mQL/rdV0yIg54irA8E6KEEqE7MIlDpFZBn4bZHAa2XqLlACo2VjYl4CyuhIKBmUPI74oEOqCsBksMIgTTml8hconiLQVQZCaNwqDBRaMQwdALsEyASYPA6AeYJkAUy7B0AuHNTNYH2C8TMg+lIYNcCElAhrAuwdiXxImjzAQA6FczF4DknoVXMswEAFZgCxySskmQPLFJNw7qTMgmgdwJoBtBZJFA6gHwB4GugmSskoIAABo+AhgwAa6N6iRRIp5ANoUEJHB8C4dZgmQb1DaF4AqAkUFkrwHxIClBTvUqgLJLwCySWT/JgU4KeoF4A2hI4igRyQlKCnKAQpvAAABLuSwsPgSpC5MCk2gkUkcMLKoG8mnwIpgUzQN6kEzyBVA8GRvAYNUyuT3JvAbKfIHkA+A/JqgOyYSlBDqBCpQgIYHxOUDDSwsTUgAOo+AhAHgTILHjSlhYHJQwCYNdGWmKAwsgmIqX5LKkBSvJPgLwKDyGnqBcpqgRQLHlynepjpXgTIJVKgCghWe8gb1LwCakWTcO10MyeoEUBZJWeMUj6T5MyA/TeAAALTclxSwpIM+yeDMhmOTmJmQAAGruTNAk0pqfNPGmZBWedk3gEiiGnKBFADU+afsEyAQykUMUrJEikqmEZHAhqeQClO9TJTNAigMGc1K8CnwGZNoJmbFK8mx5zJ8GUoB4DoB6BWqEAIWSLNaqGo0ZkcdyQzJmkXTVAvUgkJAj/CGooAIU26QSCGBDBJZbfSYYwFKDFUaghgzIDaBQCYAxAOSVAGKhNkkBYAdETIBXwgAuzRUzhUohAFZ6xlI4fiOCDpL0BQg6O2MoEEx1WHvC6IXoPsM7NdmRJIQoqGOHODCxogWqmgBOZkFylP5EcVAfBCtnQC8onZtAV2dgATlGzJAnwUMvcAQorZjJqgbKSNLYIgzzJrPKKT4HJQ/Tm5qgXDj4AALtyop40nwMIV7mqBdgEwHdOnKRSs9vJ6FfKZPMWAgUwsoIXaVZhmmqBVAAAaR8DaSqZ6gb1LlJ8CpZBMqgI6V+W3m7zbJhKHwI1gABSMcFrFAHQBAgWsOSOAC1lBCLgn50IFrFfOSBfyWwr8qIOGjfRIQceb6JFEEjfTqAYAdMt9GFkCRdZ/Jf01QGjNBBNTNAl89aSAC/L6SvyuwTBdyTwVfkPAIAVLHJNSy4LUsXgYhf5kyDjSDJGCqzGpKsz6SrMuCqzJQqsxWYhglC9CkQvQq4L0KuHeYOJOElqZMg0kriTQq8AcTWJZkWXsgtQWXyhAEwPiWNMyBCB7p6ilRSotB6nx7puHMyMoFxTThNwYFMjJoC4k0ZeAyQaJPKm1nYB327BAkLh3sU+TEZ2siYC4qYmcSCQXgDxe+ykXeKR5Linid4qGAkB325KAkLsHCWOSxJ3i3DjEoALayEl77YQlEomAxLd02s3Ke+3Qo+Kclx0+SW+l2AFL+Fb6eYAUrgpcKCl8wYXkJO1lhZ32VmbWTNPfbaTtZWSd9qlm1mCZ32SKKoIoECneooAvAGaV5IskEgZpbOWgJci9QQBBl7RP5HgChD2hWA5jUTFn0CSfAs86nMPppQgBmB6iFAQgG0TpSMA1QtAeogHWnBtFfqvSMgZjjgCmMWAKyqIJY1oARwvwMyzsOGFSBS96+6AfvtQCKAVzgoqgawMAFuoQBGQ5HEULL1BClAwZvADKBMFKD7AEVSK2XmXyEDigQAlgEUGXxvggB+gZfCwEIGJWWAy+lgYAOyFFH+SIVkWeFYiuRVig0VGK3gFipxV4qCVRKklSKEiwM8CQDPMviKGFXihxQU8foJSvFA0q6VigBlWXzJBTxyOZffgHippUAFpAFmDbLekwg6A/hFAYkBqHMyF1ySOgKTBOLYbDZjOnJQBqKOcjGcxSdq8npjVXgig5Szq5akpWiSEg30OycgHQBGGD0R2nqF1YdTkg5xLhEAVNrG2sqJ0nK0kXzISHsC0g6ErIZgIavvh6Ak1oZWkCCNoDKA1sBQ1qnYXkKcU8S3qRKBmqNVmhC6jeW7CLErUWrHYRrWUcZFtWhrnIEzEUE6s7VWqCQEwI/Bz0ZBPRcAxIFSE/B6C4cN8NAPgu9mwCmN6BPufBAgWUzvsV1XTTYOuuYBdNOsPgb5rynokiQrgnaC9j2iaHfVaQZ6ygPFzVyEgdkm+c9WQkNQQAr1j6m9Xk0sBA0HgXbfIAwH6zCt0o5CaYPwBjCMBreAeL9ivFZ5NQnuQY6EdeHX6woNuQaT0dTWxhA8J4JMLNTmpTWWA6EqY6tThuwgVA81UawlEWpEgix6WC66JA7ETgbqmM77EWMlW0B1ywsNTN5pXJ3UEgYlLGoQEPM411NuNCBApfxpnmRwhNLTETV00aVBxrAyVBeYJik1iAZNky5jQpqEArz15KmtTZ0vk3JVT5uU3TYxt6UGahAh8ryVBN0ijr0A46hECAHHQrwAAjrBsJB+hfRCIxDfWXpDSA0YFvPzRQHRiKAq1NQGtSauQ3WAQtzawuNjHxiBa/4FGm1eKR7VckEtdMYtVMBXg2gUJrda8qUCaKeRvVKkAkD0AK07JQgga/NRAEjiUadu+nbbtnl5IUsPax9RksZGsIIpswJnH2opEuzIB/CJnd+uyWsLv0HgHW7rIpHNAZATOeoakM6wcJRqoAEGJqpr27j+EUkW3SlusiYEjkr6cAYZmTUfqBZcktUApIqDvSDlqVIvM7GkIyjp1IBSzbUCKHSHJM+g8CQsBglOBkBhg1m+RMORe33bxQ/QRLmQBnhRrcp2pBAN6ELqJjMQzWpOGlHTpzaDQhUZHYpHSiWBox1gAAF4zb0d1ITHSACR2TbQYZSP7XTSjV47MIcO70F/xFhoxNIKSI7okiO3H0VYlW5yFcBlxPxyCs7R8bfIrw9Qp41geYI/lEb4A4NIaN0e1WF3WBKFSYUmvATEbuafRgYIXQfGsDXBxdL+bCHcqCQV4+Qy0ZbqrGI2npEQcOlPMKDZjo0n4zQ1GrbpFA3wFtL8G7htll51bMQeULqMiEhiNxkmaAjVMZwlC2A4A6UP2AuHRo5AaSD2yoCvFjyG5nR16MLFVh2QRxvUoovGlGpmlFqpRpa8SsAj6oM6CQl0FrONBay/CUYXTN9GZ2oLdZE1MaV1Y1DGHHrRYXyY5V8iri6gvkqoTvfbmZBQhAg49PeL7EH1ox0oiCe4LRvoHfAtavACgBMC+TMhkAySOfQvq+RTwd4eLECMkCIGfAVIuwWAQtRTI2R29i+k8cgHvoABSHeHGg3WtVwStgY0OlG31/B0os4B4M01U336Rg2AYchWBf3FsADEoD/SZp3UQBfAz+kA9gDAMsBFkUBiVbOHHAgQykbe3gGyCX2MhcOQ45bIJhW0Yae9ZIVygnBRwYGTxGkOPRtjBme6RYFye+Cf2d54iV2sqQqNfyoq380otqB/uVSf4cD7uXwZfqbwhAHcbwzIYAWyMR3sjXRXm4iL1CRnvBYUIsH7qhul0jcdkY8YHmYFB7g8PskPXEutsJHw9EKiPDLCXBR7GG0egjDvJj2x5+08eBQP2kT2EMk8w+HoBEJT16E097F3cZkIz2Z5s8OeXPOiP4b54C8heIvfw+LwuLhhpeThuxPL0V41Bre/QeQ6N3V5SjlBa/KPqlG+web1dTBtbpbjxav9YU2wJgXZhc6ex7AEJMhJgBIl3VXGq+xJP0HsCs1oK8qNo6uS1xpQD4U8cUDMCuaQ0m6RLNMK61IgJ8k+VEVPgYKMEuDG+aqCwTQHz5N8hQa6e4eX0r7z04AzgzPm4IL7N9PBzhnwakD8Hmj++tRIfmwetRj9LAE/ZQo6MfpYoq058P/jBghJ2YRY/tUAWFXqNCRbxp4/aq6oiARcm82YKoIMYVq5AXj10Q0CMY0EADsAvvVsO8UEFARe4qJ4oDP1YFJxp8VeMgBRijWpHAmi3ZE+aCj5P7NuZa73Rki22takxTOs3lQJTGndlVYeh7STuu5HqEAdk30r4lYwtZS9b6cvd+W7AIEa9b7MyFfNqrC5pYUKlSDMJxNKIbwNkVUCrFVDW0B0rm41ueJsiRlyAbgblohi0R952QnIIrCEVNOfNhkMAZEIgFQDQLLQpjHyJrCdON4QKecL1ogAnx0ABBZyr0zRiIQjxqQutIMwaHn1FZgUsUSHCLE8SGFozKpskOZn9hkAP0iZ5yAqQDVdaFSA6bMwPqH1+ZNo0Z1/XIGOWEF8zmPG03abpkFs5AfqM0+GDf6nBqDdkn9QAPdrphqaAobYEmECi4Cm8ZNZ/QKhIFAU/4eB09e+pUgRQTC76N9TQHPU04gJ8pAA1EG6xfJCAmAVyjnoaGESfIqdFc/GVRgrmUcHek8dmawzscMyQQRkdiZGYHUKgR4d0HQChBtMQIdZm7I8YiDNnWzrad2qIk7MvpEGvZrmmzoQBRAu9h57FG9lHOEgCQ16ycyBHVMzmH1c5m9QuYfT9gRQR59vYQGIMl1CA55+gZhDkBrwPc2JuQF8A9yNaro9wcpMmdZ3IgzuGZmjEVFDPfwCy6UP+MiHvPYQj2IqS2pabkJAH+oop70GOdgsTnh6iF3gJXoQLHB0LboESyjnXO4XdQb5zFApar3HmcLp5vCweZPzRn6CHSXSxdhyTChjlay+0Bsob4VcsQYme4IPtAi98PQvAcgAQDaiwpjUyZ9KOlHstD7rAqAUoKgCv3ZmbIvjfUMK3AQOXlTDljqJWftMo6iwqB66DFdBhxXHACVyPUQMixRWbITKLAEBstCXQCrKB9EMVeEtV6yrlYSVBxfdxAT7AYNI/nQHCuGotcEhzrGlZfOqWBL4YAFrqDCtVZeAaV94PBkfPPmazJp+swMEtD9WYk0lplN2LaDwZeLn7V891ams76mrA1gaDUDcNpHMtMweq/2MavhXBrtp+0y1aAq/HRu9gb0GpSiuKHRYqoGSM1HGuKRwzDZpOKt1YssWFIZOn3WVEx0iV6W8TR0+qHRC4JSgoN50/wCnjZm6cskUoJ/GCt4XYUpwZbcmbIKF5V9rFzbkDbs7RiorhAR/P/t1C17jz5+2G3heLOvZqrIBlMgjW239VnjNbZXCTfah/WMkyuDMRED/7BQBUXlmACkyiBp1dAme8UMkh3hf7wLnXVjEpY3NTphbeXVjOKT0uXQ5bXycoSLcugq2bI40dWwrZFvjQdbGl3APrc1v+0RLxtkCGTbXPy3zbNNxACre4tmAQ8HAlOKLD9PensAUdQswQH5a82RIrEB6CJZ8uWg8raiW2xrbLAAlCrPMM29Hb0t63I7U6BOzZBkueRk7suNoDZBtu8BlLU6a6JnQp0t4qgh1qEMda2vzWLrqFCQ7dbzO6AHrTFugJlEbjfX06phNfefobLDqtWNbSm2y3PFBM6TX4ZnWQCnX3AwdyquPm/rsmA7usu+mMFKVOGa854nd1yugHKDI2B7sKYEzjbpbS2z9rlVON9ZviAHh6FAANT9bkCH3kVs4JnV5ed3O2tI7tK4IXTHu4cJ7GY5/bPfSEoq/4YesHZyWQGS7h6ntgM27XxCv2J749ye3nRntz339Jt5LbpzLsV3Zr215cOEsyCtWdcicOu4yHuussTQiZs7G1RkTUh3rhvIy79YNC422k9LB7k/u+t0W6Wf9/28Day6ixXT4Nje1DbdP92SzhAeG0giRvZnUb1gdG6xcxtfAV95D2h2UnYcM3h7VwAm/maxRf9z4SuGBCw591c2p7fNuR9/EFtL4Rb6ncW4WEsBS3VSWVmnM7YiY+6Sx7tj062C9uWBgoQd8q6bcztAYdd6AYBD7Gcf+mfT8hDx99BDsSg+qnl4O5pZvtoDUA5J/ywI90CEAIWnjzyAvf32y49L6d8m+vc3vZnjm0T3AO/q4siUteWaBqwSDetPXq7uaToSJDcBGkjwHV8a2pY+scC84RpjioY58tiUPAlA5o7sDsKJJqbepygKoUz3QJWMiqHmE9nRBGoRL6R6goU91BjO3ArWSZ+HZ8CXQfA40fdYs9r2hlgHnTzFus/U77Oq9Eae6uRaNNWgGAPq99lesjLRla4IEhU6mJ92Lo7nKAErX6vtovOg1c1WNWOkOo+VpglkamivDXk0GfQx/J3mf2XZu80kgotdsiOuPlx7+QfFJmAH4NG9nDJvVfjyPEO4OyGUh+DQUYt4ABFBQ9ImUOvVVD2Am8JhpB5g9Z4uhqHgYcPRGGr28ADbVy8vYS0pAVhgEljxox2Hhk+PRw6H3D43gPD1PP8N4feK+GmeLPdnpz254hH+egvYXqLx8BRHJesRuXgrxiRJG1g/Qal3tYyONIsj6lHIz4jyMvyENekBR0UeLYlH4m5R3OkaTeNphVgvx4XHACaNlIWjnRqYB0dEJdHLrPRgcv0fBNXW86pEekUI/kHIHxjzwnQa8L0HTH0+cxwYosasH7HVjxfDdBsccHbHJAcxvYysZb6WC2+Rx/XeEHaL+Dzjg/FF5KjReA0Ihk/LtB+aA4vH6WPrj43KMnLaU6j9T1wACYMDoaFYwJrmmCeyDxv7A0JvdEm/9f+lW0iJxkH3F4GfR0TckLE1INbT0hcTbrfExRhXgWviTfcFbhSYUdUm1uSj6RNdD27OHDuzJ9MayYu4cm+GXJ7oG4FgkKxZTK8eU1CaVN6WsAuUC0CBFwBlmbImgGabZN9JOTFpXgYACh7Q80K0P4ZECPVMqlIzeAqgQlEZKYnDBIzuoXD6oHw9gzrAJHziVrWkjz7IQqAMQF6gOpyXUHauLNYx/6wsf3qOD2PreIkgBVPMU4pNcaGOAixoXwngoPiiJSdiyUqlN4FpX/4/n8QaiF0GgIyCnirAfZrECBezwJQ3sU+xdQ7GXU8bfxBqfdTxtp5WeEC4QY5duoQLFyHSXTWz102mzGruPzH/PG5/fThBVQjn9z8gEC/vo6ZvnsHGSCIPBffP1y/8L57nNGK4vjGyMIQFi8heF2662dZ01/cn0psGeKL00Of3WFfuaG6LANqEuoxOtT8Ai3kLUQkXJBQpS3LVDvOl3KnEXqL7U4hPb8WWVG6wLegBKnBC13oCLCK8tDBiX4yASgaiNwdxp6QV4i3p+PyQVZuXSFPvAbIzRwwaIXhr7r6WGjowpAhAh7Ot6aFUDFcA1EzIEB3Nkg1vUwkrtFiNx8hkJtRp9scHkFmB5O4rXXshZSA3qxtdMARBU6Ot+fsAAX7B5dbaugtxLKFyc2+jK2zmfvIHg621+C9g+a7JL2Nh70GbLcvnhBr5PITAAZ30DWATAxQGSSE+yD63Ug8T9PNTxp1YJ1r0D94DQL+P3X4XB728RuAQwgXVM3j4ywdIqf8thJ4EC+QU+8WAv9e7T9CoM/y7rWexaj7qc65UzmQefYPfpAq/1+JdGoPZRV/K/VQfVF2LqAg+6B/hIoVM/t4VgDBg9f8eKoKFFhG/wgqMM376SC3ZAUcvek8ameOCVBpfhGLX516uvLJPfDau3ySGN+O/VQ5v2cu/DNuyuLAJcECPb5N9O//Nbvogx7/VMR2VfrlVzTOP1vWAc98FES1equ84DVgSPoH856rr+/rmyiIPyDYT+h+HfpviP9d3gQx/HKmAy0In/D9kg/4Kf3H+n5MJSBsL2f63r3mTv5+64QgEv1pDTbl+ZfmAHHdX/R9G4luIYcuP0lwTMhR5X7H376BpDy+uvkiNn2v6GRkjmBe/ogMv4VpkSFYESKJCehvB+x0jmvKb3XmbLz/4M+X6/9191/S9g/WtP57gYSvgSDf+abKLCCMCIP0DNkqGAP5+wE+lOQQBBuJGIwBhPu764IE+u9jXOxvpdq1GdpCP68AeiID4y+zGI/KH+AfisB1+vXoAEg+wAYhakBeJK3YdgcQvNQwBwvjz68A8ARKB+AHdtNDIBrAWQAWSaAWn4YB3AVgGt0mvnej30yiOwEnmRARx498youQE1+VATtw0BqoGYAgBigfRD32fAVAFsBqfl8hcB4oDwG5ezAXXDQBggXTiGBnAVb7COEgWyxvAcACAB4BsgdpbyBlTnhTM+4PjN6qBXuuoF0B05l4GMBSAfoFWB7AegFpQ3AYgGjQ/AZYFCBNgaIEmB4gQzSSBcAMACuBWll8geBQPliCAKLPgEx+BBvtfZABmgYhZ5BdFKEFP+BgXAFRBJgUcjYB4QGYCxMyyG4HZBn/qAFAgcvgUHkssbDkgogfeF0GzIe/v1gowP/sf59Bp2qMFtCOQSQEwwBTOMFDoLLHnrY+4lLWCY8M1r8zH2uoKbZECXoNd4cwf4DbA7BRWuAwuinANwBlAIPuyALBWaB5A8BikElyzB8GNcEFM5csoEzecTCsE7AG2usFvomwZ1aiIRWkYpS8QQIjh0QeLNz7u+xRnUGugxwUCGX44GExgXBPAEbLzBSGHcFwYKwI8HjoUuCMGIA5AIsGkSGGPQhB+cOmYElBtAWUHTmH4OQCEgcFrep/OElhpAtY33ueqfqeanuj9BeSOdpGQIAIKDg8l6OaDAAm8OfDXQAqNdDUW5SO9gMW+jiJDGo3IfcjNBQwCACKhoQCZi+6r6CLyQqlCmqHogLttyRgSXNv5b8oIumlAb2vupyQgAqABTpxsTQVEDAAxOLWwEBzwaAEg+mAESGGUkwQMHMABAMMHEBX/uuiehYIi/CKh1IEUIjBtQMGFZASvur5Q0dGMcpdI6RG3qlBIAZQCvgDIQGI+01kEwHEWofnsH5AZII1il6DITkCPwIfulYFhUvI1jl6pYV+oruDfpWEghRYYX6XOdYWZC72jgWYCqIyvscpAmiDnoFh6nJPNRh6EoPfQT6iodlChYp2lOGjh4oOOESgIMlMFDBc4W3wckkoMcBhhQwcgDpQa4cOF6WmLAaF6EHQYEL5BPgbHxw6bgFt4KuiSBJDXohLvCjJiw5CyZY6F3NeF0QqMFdxswVNLSYeuphIXRDkHzpzbIAZ3JrrGcv8NdzAAQEclAdB7oRgDRhf/t04BB1IW+hwReNFqAc+NgTCGY6jdpIGZabQOuSIO/QKPLtqEqqfDjoe/kCBkBPQcSG1+evuazIRIAVRH0hElisCshDISyHZhr3qLDYAdISNSXAPERQAagtEsshaQ6UI5ofYP8NbRvAO4RKCb608NrKE4WQYQHSRp6LuGvoLRF4BKRLobG4BhTTECDi4NEVbgkhfgbmGfIqYYhZURJmFD4I+jIfD7nqnEZyEUhVoHxGiR+KouFP0OwUJEcwdVO5G4qmAJBqSBlCmQAZB9CG0GEBHQfzoWkRkSGFAQniLv56RqAKgAo+MUbGh+B8ft3oWR05klFz8NkeepsRXEboE7BrkTMK8BCkD5HxCAkTNpjhc4dSpmASirQqyRkoIFFdhr6BpDhRroRgBes0YcLiKhXUSO4dBAdLHAIRlAfRGZa+erb5suRDuZFUhIAUNGmwLEdD63qXES1ElmbQruHmhi5PgFZ+EUXv5xAMACNGIRAAVNhZR35CQDPoeUTeoFRnIWZHzRa8DQoREzkU0FzhN9PAgT6qiNeSAKHUQ2FdhL0SkjERPgKUBzhqwNeQWk30Z2GiIMQFtgYY15EMC0gQGqkLQeUMa+gwxPivDESgq0TgHrSEwPyHYApQNPiQq2AFPDT4MgcpGdRMAGeFo+N/qNH/+cOhlGUhGgXNHnRi0bZHXROYTxFQxlUUBqnAMJqPYncsDiBHsk6QvyGAOrqgqRvA99CKGkxLoYNHwAL8h8Gx8ssd0Hnhwat6ESw7oDMGDRaIP8KHR6USmGzRiFpwAow9iuAF1BYwOlD+8nJObGckmMc9HSxO0Z1HaxjYDjS6xY0dQEnRBsdlFOxUCoGCmx6UObESghUJyQDM64bbFOB9sXIFaxxsQ7zyxqUYH5uxagR7GMxhsU7ExxIQXUF9AgBmlBWx9nDbGNB4ce1Fkxg0TEAIRRQfrHJx2USXESeCTG8CF220XIGERIBqNDU6mOkk6L+RkOuESeHQVSArKhAOdF0QyID1EY+j4CnqP+9dky4RwzcsoCjxWenv49xkYPwDoA6AK0wKxqsUbgjxVWBkDjxaegUBTxKehmj4a24nPEcwrsbTGNa9MTNEVxb6MJEsx+UX6o3RPESVErI3MarRQOY9u9gCxIuluHrR6QkDFixkgcgBQREce4HdxcYKfG9hg9tNHz6nsdfFxgt8TeoBiTIUtFsx4ASr5JhZUXmFNh+wcWE8wl0crz1hnkZglWgzYTWHEYDIVpAdhF8LiixwW2ORGwx6MR/QQBzhMPR3RyDHQloxEnn5Hf84scnAbS/IbEEu2AgRZLYAtgDABJYOCBCQn66YlEqGo6voqg1xvCTjHD0kAdPjxB2CN7Y8gMADggwAPgFInXk8wLIl9hRqKLCHhHpN8DkRECa6AgxTiniQuooUCaLD0h4asLrw15B4B4kLxNInXAV1DIgOJbdHSFlgLiQSCzA7idYn7AeJDpaqWkXszhpU1ietIMJkkX4lxCkgdjGqhy4W8CIAu4YQCY6kKmQ6cBIwCpHSJOsoYk6mqMVwq2JaVLpEcehggf5xxNMbqyMRiFtUnwJ8pvfHsxqHoKAzw3ETwk9hHUQHhNRoQTuHDhvVqIhPxawBPrOBdQVPDJwf8cTrTQeOoMlckKbnpGTgQ8b1CKhk4P6Ece+yK2D54q8QEx1JQ9lAmnRx4FLCseeCctEPxdQaYQMOfQDPCLQZ3PSCBu7JL/Aa+XYauSFxLoWHHJkwCe0F7+dKHoCCMHoXsm9BmZHoGwhEDozbegmrMOSs60YsqodOYKRZCIgnKE3GcsX+raEJRWyedpDxiofkgwAhSK6GXQSvKfEtaRyTAkl6PMErzNJFyezHDAzkv+GLQJ3CBHKqC5KHpI8zyc1H5xTQh8kOxHQUSk1A/HPtAkphye7GZR5KfykUAgqW8DnJKCUzp0pTArzFv2/MYxaA6bKRlj+66QqYSnYXKdIE8pkcXv7IghIcCm0ResQ0nTmhqQbgyprSeAG4pvIegDAAIvKYSKhaIA6DThAwdgDOa04Obw/RcgNoHD0/AK5GbwhSXiT3ScrBDEiAoydeRaRZAhzGGYweNYm7A43g5ggQAaQbhOh1iQYmEp9oLHEqxEwevEYgM8VvEEOQ+jvEUAU8blLZpLoB0GfAhAIdF68rdFCFp+2ERE7Zg26BRF6RYgAQzGpxkcoibwsYX2GraFnJ4TqpNAuI5mpb6J2nUpbEUgm2RLITOnsh1qXuhoJwyIajhpRvlWEthJYRJY7wjCV375hJCQSC1h26fWH82Cfk/EgRikccAFgA8GYmrkF6VpGWJw8F2Hl084TADcx15Imn1x7gcYld+/icsgXpmaZJHOJkgcLZyRqAOJEaQF6bhzaRDsapGgZ84eBkSgjmicCuJMGXIGVJlTp2mGRuaUsG9pf/pYmDpJav3DsprDGOlJxgQROmoA1kaWFvo86Tepzp9kR+qLphCaDTziJIXkxYZxSf/FdhL6OuHqRqWtknfwEoNzFfpvyXpEWy+QJTEK+1MXRH/+40e8Qba9NvX5ipV8YekEAkmVOnWpdyCL7U+J2gMFTh7AWQbb+BEWd41+HKF2waGE8IXY7IUjJIDDC/qjRiAuSwbhgmQ2YP0bRYDcAwiq0EQNdBih3/JKGq0xqLDr4gG3KTQwM72KgAZiHTiKCoAkoL1DNksKHYkxZ6MGDrWAGSYuFExaWeuGmhWWUhnpZH9CLr5ZIABkmckiqAOS2hpwNgDAAvupgKy4IADABt8IAEBiQqyICABRAjWTvCWAIACFFlgzgU5R0ssTPhpvelUV8lkIm8B1EdB3YFJlH+vQWsmnaU2ZsmVOU2XEndpsUV0CKhy2RMCLZQPuNDEpq2WlH0RdMeXEUZh6eiBUpVqbSAPxTkgqmMp72MylIg79GUzspC5NxlrR3KaJm7R4mWdkCpLgMrFUxv/mSHnxx2ShGnZi8T9n7QmmZdnsx12f+F7oSqR/Eqp6Qk9kjpd2lqmvZOAbqkfZroeQCoAqmLUl4Zfgc5HQJqmTjlIhdYRxFshTGVDkCRv6XEL/p9CUKG05pBPel4kiMTsFRAcaR/wXpiaccCnphvnSEL4KGQSCAZEagcI5gHOfPj8oQudBlfqHQdlDBhpKQ049C8rh+G3hIJI+APhIsE+FHIH7q+EPa74eEAB6GGpzqbhM4W9A3eHjG6kJ2cuX8jbKI0bkAOWt+EiHnReFIQBQg+MTjTKUP6FEBRAqoDwF0okbBCSVAroSHKEAhACD4461erUmQY4vlRJy5dKMKlkpJOXSiQ5hUWZHrpzYQ7YYJoENQkLRWQOwlwxXCSxl+p9VLAxwIO/kBrSJ0aViibQhyE0KyO5eTSSLh0iTzkUo4ueTwoxGaXiR85kMeTxQc1iTLnyJmWpjGQBNOGIahOsOCD6S5qwtIluJfkXpZNBZYHqkgJe/nFAK5IqRO4G59jhkh3hGua+7KmWuUdzPhuuVmJ/wW+UbkW+lNFVpLh+mQQAW5GaNyFtAcudvgxIqyQ4QbxY8cWm6ApaVPFZIL+U5DY5HoInmipDMSdnnR5PBdkrRXKXUGQ2mUMvliZCgbOqDx+2Wz4f5a8NvFCAk8d6jKAvyAPF3miUYl7r5HQQl6cYdaUdHyZPwaYYIofVDzFnY+DjlqQ8KQIQWIR2YI2m8+DBOwEpe1oJgbAo7JC2mCGhLoVCBxyLhXQD+4zHwWrmg1mHncFvAMZldsAak5nrUu0LSRgSLDHunpWJBdOBIpt2FcDGsl4PcBOE1pHoXhgwxLLzVUKIEBzqeLHnQDNkLbDvbWAAhfvnzUTGvBgRo6hZ1xMFnGFyiW4mlPXj3BZAHjz3OWIE0RzgjwV/zWgsmOyAQkgGCiHhAQCKfDsgXAOwhqIiRaqCGkFGMgAgAZZsk6wo58I4V2IUASKBRWg5N1gSWioGvyXyxRf0TowHuu4WaFm0QlZnwroSl5pe+2eyjkF3wbOJUFfwfQWEgvmKl7MFnvuI4ARMaGwW8A4hZwXSFBQDwXZgEhccD5FIhsUxZx6UFhEZYJ9CsVfIXBdMWyFjILwWBAChSBLtCDNCoXWQ1DkQktFiXtoXHaxhe9iGFFgg3SmF5hYwLDE2ANYW2FQKPYULF3Ys4UuKnaNLZG+FxV4WmQkQL4UWgcGAEUSuQRV0xTwoRdSCXyHYQUCRF0RdUCxFEJKuSpFyRZgVJF6RfvhZFhNrkUOF+LivxOFg8FUWlFS0eUWIglRUPqDkbmfcC1FjYZ1xh5sXhZCNF0+MQUpARfigVz08UYyUbpHhenZ4sYhm4CE2Y3MUWilV+q5o3gwYCmSwRiJV6h/Z0marHuFTuS5a25bue2gRFCpeRitiB6H3j/C8wcPTrpdQOuBGgzRVMVcY+OUH6ZkNgevwo4WxXwBUS2YLhEqZJ2Q6Wp5lyW0IrI13PaUWl69ppCTZ9KA5B0QRBZf4lgSvJCCWyoZXpF3k2Gf9n7guGEZBoFpaRnod4+BRx6koGAMqQxwK8TFG5AHQXQAmiK4IKb45GkIDmM2ZkcTknZhZWZy6wkOXRkqQjkdZDzoh8HQiGgyTFiiF0f+krhEx8KV8Bj27JDfBJYsAq8lvZzZGFFkxXyRpFY5BZUWVtwZBeWXD2lZcck1lK4OND1ljGY2WLpLZemKnw7Ze3Y+ZU+j0A9lDyf2Wr6TuuKDDlMolynjl42ZOVcp05RNl7+6oW/mhhp2uqHbZMvlwDuh02RQFHRR2eOmIEfwGck0Z1OffYvxNydGIMOp5XegZMY2lynvJWOV8l7kM5Xv6YswBYnGulIOYeGQFD8ebgKJPSfeV3+A4eYELJ81DmCjJfkfTDpQUyUgizwsyR2DzJncdSr1UHQWiBdpVpQnH+B5GdhXPEHpfd4OBb2SknVR84ZtHUqm0T8mfZHHi6mos3JXNkDBMlYdiuh+0ClE4ZJqfREIp5gTkA4+HAfUk8VIASpWZYrEtmHUC2MaR4TAkKkMBJOXgRBiY6yApbjA5BlVPm4VHmZw5uguefdGnwnvi/E8Jk4W9BNCeiYpFY5PqRjmThfoZvCBVD6eDEmJdIWQioxPOQjExVBuJ3nSJmaUBoShrUG/DYxuia1B7Eo8mZXYxllTCWOhLusmldhM+deTQZqFXpHFyOafGW4ZZZeqZxhnmUTnHJtVdSmIJm5XZGU5W5WBVXAy6Z2g15fJQelbpS0Tult5w1dgmg55yeNU95QQPulTV6djNX1hE+U0H4RF6XDGWJP6XhFSiQuQ+lyJdiTtWa8QuZ+lyJOZkdUWcQuQYlbVHvscr9AEsDpny2wwK3IDEqqA3grkA7grC8AySEMDspyINlnu2nAZrYh6wtpyT4wiGX/Cnw+WXpkSwU4S+nVAncUzphVLQG+mLhb6fuFLAENdYCQw0NcjXz4CMYjXbAflXoAu2QGqjD7haVIg6OUWNeBmlZWSSAZZJpWdDUlZXJO7YQ1+MC+m2A+WfITQ18NfTV/weNfzVTwMwmQLpQsDPWJY1kMP9UgG+WU9jv6qNWZD81kECoSsMjlArU9A3NRljQ1CtZTUgGgtTRUi1CNSHqfw8hFjWnw0tX/Cy1vNUBpK1WQCrUpkxwGSDj57+gfD81/Ifll/xNCq1AQ1JDP7HWACtSE7y1u4SfrG6/loAYW1sDC+mB10BjRUO1V6XKWb4eOWpVeh+adGqbxQyFFY/52BUhCJ1VaXv6vBr5bpCKhrwZ+UvBBAIXXrZp2u6Gl1TGEamcVZ8YzYXxVZSDm8RlqaBVp5qtLQWAR9yayZmh79F8npBJIU+U1VnqZaXJ1a2bQDF1o9TXU1AwkcKl0xewo5X0B3kchIuVNOdB7npQob5nM6MCO9gwAGYgY7ACaUILZypQmYuTNEDwJllRAbWRimSBU9V6lVZA3tVUceO1vmBkFfaVxWtV5KcxgQF5Ccxk0efCSJWQ2JVmDlblYkS2nhpEqfFzgNolSA1UpM6D5YPlwAHODOhvKfnUlxbRQckAV+lfQFQxa9Uzo3Z3dfdma6C5APWSVrocxjMo+QLJX11BGUnknZlDdVzUNZORJadVPVTSmoJiYSunZ5GeVNWjVtkRQkhVvDYWGkJ7WOQn1ha6QtUiNrYQgTiNjCUID6SakXJFn1vOSGAMVtZrUB3c9CZYlAaq1W8ANZFVWjFbVUToxWy42WRbUPAFtbODrhtgKgD9AxNWY2Lh/ONs4+WwUIdVdh+9YY2nVRiedWmNLNU9gPA1tcHEpOeNbLXniuzq40iQESUJVd5liQHi8AJFQOB46CTaVkJNLaWk1/wodRk1JY/sSk4jAgNYAYvpPQHY3PVGTUBI8JBTRKD3VE+rLXSJVVXIlHQ7IJoHWJc+RhkV+qaaXFcVxQZfEMNHTdXGykuKpaDwetkjRVpQYpOo1CAwzaCDrhsNuuETNUzalqzNSGUM0Ie0zXKRfJFBs/WVOGXpg0dFa2qsG2+6wQ9YkwTtSyA4N05hl5WqJzTsA2Q66eKifhcWYJXzVlYfc3JMQgJsGw0Kpa81Xc0+g7DciuQMl64k6vJw7XoV8goZfNJAA83M0EQSIGj4FDm+QjAcLWGZvkhdFLaMaDru+wGEj4GC1wwAJEi0pmb5F4CwGXTNIbWBpZlkBYtGIGC0pWtDmlaNFeLQlaUOKSLfWG++Yd83/2AZXv5BhclQrCKh66DXXqc9ubWBctmesXzxA0ZRx5RhbRf2mQJ3wXyR3iU0VSznNkRBmGsNi6SLADVhqOnlSN1YRSnDg5yWsDlhKpQelHpS0Ya1CNOrS2FLVFOZQmF0vUOGmQB38MOGpQb0WOFNRm8mbkk1q4U1E35D2CuH8Zw4b62DBMkQG0bhqkf3nq+HQf54LlXFcuXkp/nhuXsNTZV0kPQHla0CnwLRIOrr1XYd/FKNXJC0SbV0VUzlM5eAQW14kBXFGkMJwAMW1npyVb2kfp5bQpFpVGMVylLCWzUD6bAyAPcJCtHQY4AQ4ICqlH5le/n211149QdlyZIBT00g5I7W3WsRi6dq1YJhYVnlPR60UhnAxwacFUsZrddDHWJ0aelDVtG9Qbibw8VfEkPlsTcPUcei8cvGRgUICWBDx5JMnrp128caTWg5aZWndhKiJ+0n6pwRQCFp4cLvHYFhafhq7ApQPyRYF08Qdz4aRwFfqzAReud5p1J6P+1lp2BTRStggmCWDOQ10PMCuqVlc6lsIFgAKFrAwANcAeAQirhylAuwFMkpFAHRB0HxU8NB2wdwALB0dBHTbs2Ll9DSDmpp/FeAEKpcOdA4I5coQgARAAoTvAgAWASLooNfdcLE9sXKYAlBp7bTL78A78tK1NVA6V0JYVIAUp2qtS0VmGchGrVw2DVC7cQl8NuCTa08NlraI0GtBCRWHGd0jda3MhEjaLBQN42dnZs5ETN9kTqNCACQYCL6WuEROhMbuEK16OU0EpJpQKsKUBfYR0G3tLgBXVewaBUWmZ1mBTR2odiAOh0uAd5hC4XiWmEmTXW0iHQY2Wp/C7yIupIm27rso/Bi5cGWLg2S4uXxZvyMgxLtTGkuScIGLS6MhnWQOEMPqd69edLn9wcgahsy5aGrLhDwcuCmYYYCuJhkfXmGPLkK4Y8b6LYY+GErg4bdwcRtCCk8u1nTAEgVPH0KKuOwMq7+GarkEY88PgKEbauERmLwS8MRjLzOGCRia6Nl81MEaWumvJkaIg2Rmki5Gauo64FGm3K65aeawKUad10pt66fQ1Rr65juXrnwxBuPuiG4RuYbq0YRup8N0ZWEMbgMaLuwxmlSjGqbveATGuglMYUgafIYI8Aubo6j5uyxvmJ3CJbg4JbGOxq4JCghbjW5LGXglngNupxn3yBCFxqV0du8ADcZ3GxhA8bHqTxtvWvGwPe8ZeunxmoY/G47qJDr0gJrsQJQrNPO4zZ61Mu6wm6PfCYbuSJi6gqwckHu7OipFoe44mjzGe44GWmA91Xua/je5rc97ptyPuvXs+6ElBRUyYncuuWybW+F+a7q/ufEJCorwMKoyrsqKKmyrMqnKrir4qhKriokqZKsSqEqeKlSoZBABNEgMq3vbCpMqSKv73oqgfdirB9PKmH2kqkWISpl8mgLipR9lKtSq0qABOM4AeL8EB4E0n3Eu5geNkLPXZFs9dNjuYSZWPTwWfwD5QIWKhOk6+5JhDmB1AIZrqD2gFAGjRuAY5sP2j9hqPJasWvpNh6OBNYHWDQe9zVmbQezYTc1h2MmKP3T+MAHoAuWLTJICiw5ABIC8As7CTVFadQHpb1FK/UP3MliXgiik4fpJU4hyXrEnX1V6QHA5yAE/TJjb9u/Uf2SASpqv37BrEsqZ3FcbF/2XeO/Xv0SArHHv4P+6+Rv0j93/Q/7pl2zTEgDtY7UFBytxRqwysFaSDvo4Ai9oTSRaCA1v0fNP6g9DzW8XMqaWgKAGKIoDQPhk5Sk6+ZeFe0Q/Zv3f9jAypCZaC+f8K3g8/WjDKRLcPwNBa7zQQOZO3A4GVii6+f8YkDMmDb3Q6vJIkgJQj1ZgZ8S4sSHjTRTfqZAs6qBpn5GZWBig6VOo1kK0UFYlLb6kZ00eAO+l4edsVHcL/PK0gQ4A4g6JBdQTwGfG5cNYMyFNBaLBODHkdkVHIRrPISpZmACACilqwC/zleiuj7qWAEQIDrkJ5ug8DK6EAOMIvaJwOjDrWNDkWCHegiU+ns2AcDo4ZIZUEgar5+/Sf07997c7Dwo0nhQB4SWEuwyiIQkeAGDV86CpDVDsnsuIqUmlG8BrA35kPYdmDwAKDegPZjp7AWuQPBQreQlJdgu25oK+I3EKdJrrjDa6PoxEG5yXOA3kmnLgCIAhAFaBCRUQgyFrD0/kRKbD2w7PWUqHoXiEQSl5vV4VMh4M14K4ren8WW6ig7BA+m6RfQSZaATkbA+mF5bMNuOIkKkJfDqMDfCzDvjq/DWAHw9sGiIJpREUXlwyVaDQjiJReWoYLw0COTaeyJ/Y+gwUKsNvoEAJpxdVV8poAhSOw9LrbK8+JjwV8PbiJAQiEaE8NmWgA4WF8DoiCQlDleAzsHMjkhdCEZYUQCLqLD5otiPrDayvsF7DElmsMUjrlQgAFgjw41pW6JQAlZvDt2MagOW+pvmC8AZIG0Jd9LNITrAjF6Ldr0joIWqOowsWZYAMWimEYavq+wziMbDmeQaMigjROw0vErRKToGgYo7463YdiQlY/DHkJXLw8j4iIAuAeOKPE7qhgI0QMhIOG0R/AEAHC62WZGs2jQYCsB9544xw9UDNh1QNXoEg0cq7KZjWYy7L1ElyOwDTcFAPUT3AFfBmPZjZY8ADAAEADaC+5kKPfTRo+mCngvoKADupAYpY2WNZj5yXkwljhcu2PZjFYxADIcAKI2OgghKIoAQAlYwQCqo+yBgCtjPY72OZjXVYWbH9LuUOPOQ6Y5gBtj84+OOVjqZbLQqkm4/ONdVqwuuMHjvY/2NhYyAPkCpAlINSDdA2AKePtjVcopC4jrAE/jbDikA+NljVcmlYvj/JQaOdcZ1ulYfjc41uOvq7DWWAnjIE1uP9jmgLEX1EKeC8PVcfkAcoP+Zw6BMLj7Da+iQT6E67L9jseHxwfg941BPzjVclqUcgKeBsNvj8Iy9gRFn49mNVy5llaNCjxynRNZjVcpGWmwv45nkcT6AN2M4TLsnfDRIL49SEvj9RH/T1EtxnYAQA9gKxPtji45IzoAgagMR54fANgAX9b6LJOuyFQHxP8T01ptbWkmnCJOacYk/imFjkk7YDSTmk/RNmjhgExNLthNFZNsTZo+YRcTQo+YRWAjkxhOZhCk0pPvNTVjfjqT64/xMQA2kxuPETvY+Qwowtkwcqpmok+JPmTlk+FOgT8kxwx/qTlNWCqTgU45OhTyU1LiXDwuAmMuib48mP7BLWI5O5jU3FwCpARY45OCT0U+PxSTtYLVMbW4VsJMJTTU0lNljkU+aKGT7UzlNbjXaHLmlDK44wCKlivT2T/GUo5CmMkSo38hAYs02qOslNGOV4ZAPI1XIXZv455Au5qMHaOgV9RN1jLTTulRMR+eJBQA8jLo7tAFlf6kPHrOZfBQB3TLsspgQAvAOzBRgmnAAAGsvPYCpmFQHD5JOaky9h5jedpYRyRpWqUDvTFI7DYnA6amFpZqzOuSR1qMAMH7RIQiIEgtqRZG2rrhnqtxHGQYpEdzuqKTJCKngyBIkOiMOhWqZZqh8CsUN6hIPerS2s9e/QwhytFFP/JpBAOQAkqWdh3QzoWpmrGqx5CBpgaw7AHiFqAYk32DTekRlP/JdaYrnrIloBHBg4pGOqOrOtKIKCpaYAmUjZ5T0H+Bs4uAEp6Y6IVfLPfg2ALwBeA5uliiJWujn/ruwvZZYBZD6NNWJSiSaV0B2zWVvUQvT+QIQDXkJyhxGZAjRBJOugvhP+oTwz6mLOlhqWm+j3qDIUWDSAzVHjgt8eJNTkFlXoAPGy0Y04u606qtDGYZtzOgdojkskDBUEghICtAmc+MHCnworDPBg+0xc9YSLod9KsB8gZDu9ybUpARmAftB8Gy6XTfybSixdcbAzMiDKhqx6uhhs4rMVD0OiYkScu/ZXpYgd6IXCEasM3zOmqvXp5AxarqsZAeqfas0Zrz3WMVq+qV6gcVoim1H2pOYApJCj/9hxV9Spml2N4h+etaQE5OY8JR0HDzURSbNDxtOnDTlhiqU8anw/bt/yrkUoTCmk0soT7RFzqcPmSXlaxQOQKi9XXToMWFNZdnFzBZOEh1zl6ggvgLk9m+hA0qC3yA/apQG+iNEWCxlg82mQn7MEL8+CuQkxBIO9NtMYC/ISICC5i1gBOYC8yBDAVnMyAQlm7jADMgUQK92qznJFdjDE2QwCQwLM8FyRkO5XmYPJa/Cw7pZWQi7TCxc+8wbwjslmRKTHeFLebzHzZyqqiKFKdZ9DAAoqqH1TwCvCvOHUaFRPPSW3YMEU8ts5I+Cfi7IOAS+TjYEUAYAdpPkh+oQGHKU+Qapa7nPm3JY7lnBvGuqXu5PsXABe5WaD7l+5U5mlQiYaozqXgu0QkdxmAdwN6NLDNQID37uj7TEgplmegdRnw/7liLv5GIEMIm4jUAqb2tBQLuPD9VA4tj3AviBiyOQEcs0B3RtYuULrOUY4V1MG3DvwD9AnSwswp0sZoEIwwPhNlDeo9oPmCEosc+EAliOLgMsuE8ACfhIcb0CMt/kyIOMuTjm7rUvLgyy8XzTgtYpGNDI3/WFjPEfQksv5g8hI3gDQNPPyiBAhyxct/gJy6Qx9Ucg0yKddurPl3ti7SyKhIuV/KELe8FXYHyP82LjV1ElQhgUWiG9XSLASGmZGS6tdTru10vwqQDS7ddFQCV4MuoAgN3aGHc6CwjdlBfy6o8vLlQW4rFhnMvCuNhmK4LdBIJK7Ld0rut1yu23eK5+GqroEYauvPFq7hGurvq6XdK3VCA3d8DfNQIrj3RZzPdPImJTXzGLbCvfdXRb907enrorE14NRn64V9oDJD0ZI0PViDtGcPWquRuqFNG59GKPS0ho9ybmMZY96bnqKZuuPQGw5umfHm6t87guT32CmxtXwVuuxrT3Vuhxh3zM9TbmcZs9rblcadutxpEKUjCAMHh9uH1XKtruYvYy6jua7v8bS9U7kCZy9oJvSLjTB4Mr3MCqvV640cm7tu4YmPcFu45rB7o17HuhvQSZxiLy/YAkmmvRb2Um4lA+5HZdvYybjaTvaBFfubvaAy/ukKAyrh2jIJdCMg40IyDp2jILXoqqSqiqpqqJfQARSkDKmQB+wzcFhn9AjIGSBxgjILVXLrvjEw3gMjIFp3DrkqqqrR92ACACkqGqr2EMqLPLaZeA3a3aa7AjIHFbYdGqskvmiZII062ai7up1zgZhgDNM645ma2m60SAFMOjYoxxF+TRBh+vrjXVajRRTf64E0wzvM7WppU0G+Fqq08+jzMIbiM4AJpZpiGjOz+gAulDCgUVrwMHq72Gd54bqMGfXQWZ9YuZ0gykdYAUa38GKTbwBM6955+Oek61mQrDIcO7m1XhUCgaXrBnCnY9avSD9VGG/GJYbAmzhu0AxGzOpb4PzNLa2a0CTfjiovGRE4CzPGy+hTMWKHZgCbu4EJsait2FeEzNtG4uSFgqWrdozT1lEJEvTOaEBi9QNGiZ61wLGwC3WeL8tYEagPppFh6tyBdNUimlzmZAGbxwI7nmbDAJchowtVDGH0RqElgNuuhetbTlF+GZhjEtoAVGHObik28A4J+rUKbL0MjV0w+bas8AM7DRBoFuowQWiFtHR2AemGtASvnFtotPGp2nvsnkC5spb7m2XoZbS1dltikfm2Zv5blm8Fs1+ywkH7hb+zTWziFOA5aCTpI1FvAVbc8PFucZSW65upbHm8KaZb8Cr5u5bTfQVvdbM3r1thbCsBQUrTpwMNsgQWGXVTjbGfpNtVbCBIuvRedW8ltubgpp5uLbrW1yT+bnW0FtFbKgVtupBCkHAnjtKyHSRnbJLTF0zbDW7dsLbLW/RttbK2wFtdbr2xtslbTze1VjbE279tcajGow3TgzDbVu7Is241vpb4uPdtg7j2x1sWbL23/Bvb//tgGo7tQGcHfblW8js8aWnRjv1bN27gk47FekX4Pb7W3ltE7hWyTuK+722VVyAWneVsnbBJgYVIzVadxvga5zBAi/Z6AHJsLsFAbkC/NzIg5sIEZ6xEpD6/wjiiIAXgNYBjmauxRu5bDvlrteAefoqvFACjfyEOWRVnJEOW40HZXxbZ1omkvVYflruoAQznruXrU/QTsu7ju6bvg9zolbs8wNFbbulWNu4ejhOkoMAC7ASO8JrJeZ1gYnO7Ruzeu67hIDete7HO0nvx7fu7HxyQmipbuBA4dsHuBA1uxKoh7/AEXugQEe1oSWkPpgrsNqTOsiCTmvQ+7RSAGngKAiwQriMOs0+nhMyzD+ctMzC1DZC+imbYfsinjCxG4Dop7r6A+hT6VGzn6XoTG1thsbJfu4s1eyu3kBXmGwjcPlMLXrNynIjgGWt5dbS4wafLJXb6tc9fy9wZUUvBl8A4u9BLV1grDXaz6SGzXdIawrFvNgSjcD1j12ei/XcouDdOhp1jYrXRYSvTdfLlN2Cu6PNYZzdZK0q6LdBPDsBcra3eTyyum3Z4YKu9Kyq4BG6rsEYsrYRjq6RGF3VLxXd8Rsa68r/QJ/uLW+1ta4vdtrm932uH3W10SrxRn91/hTyF66VGQECD21Ga7hD3UmyUKqvN4sPZ0YI9Ubkj26rcbvqtusq7im7aiEALqKTGKoHj0zGhPVavE9Nq4W52rnkJT2OrtfACrzGzYvT158jPccaNuZoqz1BClxj8uj8XbvcaBrX4AL0UoQvVUYi9sfBGvfGCq164xrS1PGsgmWIAr2Luqa6u5q91Rhr0om2vXmv7uevYWtfAJ7qRBG9UapQeJwFa8tzkmlvTWvW9dawyavujve9jO9La9mKuM3aGaOD653iBIym2i/Nyge1CNQNRmtGAqjJm1/cRZ6AgSKmZnQuoM5q8oW5F/yhQT+GGadHecnTpz9cgJsG8AAx90fDHppU0c7DaxA0exQc09Merblm9Melm+1ux6VOFqmDitg0g0rmT0vwiWAVLMmEaUtHqAJ742QsVoBPU2mx6qbWghxypBvAU6A5l6UlR3jSxsjxyICQggam84tag+DEO2b/JCrR8wx0Crt4Ao8jaUP+N+AYwZwAVGDRtC+lnQBgSN1rWTy6KmraESkPjNgQgsLzA8D36vgO7QnEsuxCcKFP6kIDjH0ESiBD42m4EBknxCZk5let+zCf9icJwGo7ILrkCf3E2uuikYaR5H5InEyQNTT36swKhhkgkIAQBjHXRwAUyaEAP2zWU4DJCebxOJ+Ab7AvnuAyYtl+TtZVa0wF74LYxwOtJ4hyyScfa00UZda2+Dx8tS6UOmHKbDYwsHsLbYEMfE3LUEVNosHgqAkPhK76U1IwPEwJ2LTgGYJ/UMZWaVjHlHkRLVyet0gwVgQlanWIqcsAvgEazlYaKLCdT+mi2fMHzJQIyS+pNGI9R1T8pyeg9DJiMiceAqJ9gFj4/RxKeZW6pHaTAgEZzgSgs0Z3gCGIQ+i1DvHiZ1QKCnaYF8BOUFAHdCNnXe03hBnx0DR6Fn6KY8kJQXZ33tQer0M3bWE/Z/cQ6yRZ2GdVnvjCVoEbhqLB1SnOsokCQOjJM5GX2xXgDOAjbw3UTW6JnOMxxDpIPZyja6QuQOG+Jx8PS7n8pMiezAxLRAAC8iCGGdHkokjZA54LQH90/6MpyPCinG5mScug9fXKfF8J6HWcQGo8oxqqnb5wzQ7DP4Vqc0I4nk5j40kJmOL35SiFvnAYe/haqjzq8O5Z0xig/ufliwpdRMXsA6H8HWUJpQ/5i++5xCcAz1gDBrUXL2KhMBz+55sF0XJpWFZ/rTF05QcX+k1pR2k+5xlNcXL2BlO8XzF+RcZT1kI+sLgMu583zHao4yMn4c0283sw3yCSDwhql4tPI6GlxB5OU4S332/hVGooMQe8HQgk6SepcwAl1OYCmNLurGLkMy2WADM7DgTl5dBzO/AE5fjQCzlXpOX6dtg6SoTl7XoN4/wk5dhQ8VGbt00ugFUDmEvB5fnmEdYEI4hWPE05c8TZ8JyV+XLeNJHiCWUMxaBARl9b5ZQc0ypfbTbzXKCaXjgNpdlXyOhVcGXBV731ywdyEb7P9omPQMy+AIdyWvruo5kMATVZtpcXHVZhlYKOoKQmS54XqCpejHNJ9kOzzZM9NF/9Xi8bNd4X6NKkaXJsjjymxUZsuNzTvAMtdiAq1xBvrXeJOwc3+FuHDpvxPQCTS6OsDsZDpCjsJsQUoB+47A0c7tAvRt70wwvRAW3ewgzXEO+FtPMWR5uuloD5umvsprm+9Ed4MS7ncOH0DDHzFSApNLA4AOY/BsIqe5M3RZ0tYUFsQasFKN/A3w3/Iyfg0d5zRhXpoa3ZdCjhwVfgXIglxGjBQLxC6hPXhcC9f4gyOO9fGoyOF9f9me2AOjc4QFGdj81oiZjpk3S7XOYiWQHHPyrCUWy7O1wOps8W9lro/SD81PQEF0EbE9heW7gFGPlP2AyONcPYmyOBRbIGUkKqh32CpEZun2i4TmDA3uN2ZCkM9fZnki3Veh9UnA5Qmli62NooTSgXni2QMe3wG1CcHUmtz+S+jkgBRAbChg0D4MXUJ/hcbcMc36GshmMd+d54HIKk7X2cOAaB8Q3oJCO6AzALuiF69MI4OsYKe3yZYA6ezZA0weu8zvT9uoKdBjmwphXdhODt2OZLVBu0jCSoBd4c5N3mvgv319kO5ciLHa/XMeG3B/WR4lm6tNB7WFjt23TjXHIEBwKkWd9uSqM+deZsEAv2F1c6k1Q7UN2UjsL1ABUNl4aUTnDQ89uZCmKds1gXEd6tkf9iIYSAlQ9KEbKn31RqiU+ABN0rMZnCJ7eEGqL05IDJXytB/fQzkgE5fmET2Bmrz6Tl3bUUOEeXXjJmN+MgCR5mkJPdkYSAhQ1ynnV3mXT2QIbua+InudCBhd1N7qZGmVioJc6ebFYScqTe/egNv9PZCwN0jk5ypcxadR/5psVP8uQFaeZp08eWnwHtadUatp/GkHCZYHTcxJJhJzB0ADpzshOn580Pa/H7p5OIcwXpwYAgnD+hrRIhV91iA33VWD+jx3XqNBTVxSRl75kmjII/dE3CJzZAaX354td1wRURmfbXao7tf4p+14SBrXaA8deH9w0ztd7XB1zUCQnik6dNawuUItJXAT11QJM3/DO9dY3HN3p6WA58L9d738Jz9TdYRvsgPgSF5gsLg3DXpDdcMB1HNWDX8VmFAT52yypALmQt6CEU36zkdfGJo5D/qLINwjAzKoCjjOduAwvKif0gQVrhzMS54CmT5nH50+ehn8F+0+5L3YZBdDAQp5pVyAKd5xhS8Onm08DnQwPsDzn8F4ueYnUZ+ufKn+JwhZG3AVgEkl0JqMlmVWOw4pOa2Ro7bdCj9tzB6oAPsFU//WUNczqIAZTKzqIAza47aHcA6H4/N7+ICcP/mMEsmC9noT+fDXeb2HlfN2gts83bPmp5rfbDOt/r3bD+t+7QuohdJc9RDnNjc/wpIoHc/+PhMDtYkAe/QQDVXpQ0NaJ2btwKfgGVSPuqQLgQB+e7Az58Lzq84IyB6o3KrFaD/mtGOlYhP72GE/WAdAOOe/P0TwC9WDGU37cJPTgEk83D6VvrfEvA5wcBkvDZ14+SSi0o2e6k7HEcCgU8OMvNIkjZ5BcHATlxJfGP206Y/kMH97OCE0LQRPeYACd+pirk8j6nsYP7uX1o4PpziQ/m8Up7UoqnqLHBcOYCF5qc7i/YEBIigi0lJLiqOp2lSKLsaphfUI2F+1w1V9j5g3vD3wRIs0CbQEReUPn/bLacDM2oG2x2w4KIN76S9mM1Lmld+iBpvhAzNpyk2TopaJvaUPMBZvVVsjjFvIoPoo8DQGOoNvNBAXCNN+yOpnYrOa0Q825vmTnW/NvednbbRYSQ7G8Cshe6imlZKb1Y2ZvutqHuu9cpGnYR77JKW852tNq736KOVypdNvkhSeaNvJvt2/52xEl29/2Nce28tvkg1Dhn3KD85dXXGSD4Oy2KgzsVqDIEGraoGo77HnMgd79m/CAj7yA3PvWBjO+aWH72k5fvr7+W9KDzd8jg3vL77BGp3Y9WQ9Q6BF8xCBsVoLEWqjikxSdxaDjXtorAKZLondxgF+KeDHacxpv+nNJwo5d+hpwQikzuusPQlnKZkR/RDJH60ebDlH30fUfZZybl6WVH7h8THoI6gJ6TJ1jR+c2e2MXR9Wglxx/AhdJ9LYfNId38m4PAatLPk0e6OEWUvWnkMh6PhZgidPPioH+YDDmAgOAfPTL7dgj4bL3NWX2J9QWCpnu7A2QsLwYMqjgDuRk3iXY1n+wNDIuLogQxwpsEfgOfiA0Mg9eCAMahz8alG3SufKwI6nPYNtWHU2xpn/kvwXyZxdpmfZsWllCF4oLAz4WeIVLftofucTiPBtcMqhG+ikBJ7Ygg1o4AQkS7p4XTgPgLVrZfofvUUu3gJaV/lfnL7f2cYaWFqfAOqX4eDsIGX3CXBweiJrfEW15vr3kWB1NgEYOzlq5ZdFrX37nwUzBY8Ho3gEwlak4Z7npFrOeD81anv/xvDS06rA8/d6Vk54ay37lnyrDgDMedkNtf9eDiEAvGOnV6h+HUKw5WQ8gwZ5MCjWPUUtYNX/+D7ex5azq9Ge2NMwmcd36saYgzzYDp7YAghB6A6nLL5To0J31+u2RWE8KPIJjtXCV5DuN8NdnP7mRRhJD4P1lYnf2IZ1//Q7XJ3N6Rwz9OCn8p73BJa0hPw4Pd65P+PeQssD9T8cMOr9dDz3BP4YI+xN+KiWR38KAzfqfRkLS9afIJO89gC315mLjnBhVaR4Aqn21y5C6+3V59fjXtywHU8jzmezxEs/kC8AGr3NOvzjWn9+bQJVzr+LTpkFrBq/yQNVdqXBv0Y/8nIdxLMQb6v2qOa/003G86Xtb0peowZv9b/G/rI76mm/3WOq8W/2OU4+WPLj5Hez9d37QAO/206VdqX6dGjBfOM187/JMAgyX56/DzQJUvw3vnpFvW+QJ0eXjxP4O3xh1CCLABUb2E/fwnP6u7zlnjsOSG+k+GHXiQ8uUvIDKASMqGQ+b3mTsDQO2+clCf2U9vSBMPgP+Re5f+n/GeM0/NPxcmluX4tDlnmF2Nnz48J86eJwMGBEvvNjV/cGeQHkFqdgS0wAY57Mp8zF+RfcUYX9AUSnglY7IKaOBjfHGF2+T3Mq/1Lgp/ukKc8qrUQLwiIAQ072iqj+H+j4UPArLl+jXiPwIMX/e9Pj8KBLF6ATHY4TuesCovdF4UGBJhJOY5R3ID5q4tYpg42DG6gwbIauZAvasYAqw4oIPbm3RKCTvO0jp2DAG16GqyEPUsinHMB7MDPsj6eNwCQ6ZMzUqdaTzAa4C+SRaTdNCIoiAfgBq/C4joGN25D7EVZjAREBS2GgZu3SB6R5BX6sWIQHegWGxuoSJAtHcDCOpRX7gXZX4ceWga/rMgGrfJXL7/Yf40Amf6iPef7sIAYh99VDBv3MKxr/O5DKQZ07XWTmhlAFf5ZnEZw8gUAZeWOoKqwXvxxLIujZARpDRYFeAkAQ/a9eN5YMGBFyhIL5Yc9X5Z38SroArarr37YFaEuMQwQrdHxQrV/bkuPiwW8TkCIrerTIrAeZ9dSNborIbrsufQyjdUA6CucA4WeGbrQHUVw48claUrd4hIHVwwoHDbpbdLwyYHfbpMrXA7HdVlYEHc7rRGYg5crHlamueahJAgVatUIVavdUVaMHcVYuuSVYGmaVamECoxhrHg5RXbPDKrAQ4arIQ5YIRYHxFcgI6rXSLJrK2DSHEYyyHJ4Q6iF4Qx4LNzKHS1Z18a1a1uW1YEAYtz2rMtzU9fQ7uCIw51ud1YHoFnoBCSw6BAmw7+rbtz3DINaOHftxhrIdxfGMshRrSXoGmHw6y9Pw7USBdwtIII5wmDNYImMI5a9XdyRHXXrJPaQRFrPEwlrDbC9As3qkmKtZ3uDI4KOEP67ce3oHcXI4vhF3qXcSPxtrYKBiAPJY57QDyVHFpIcoFXDiQWo6V3QB5hWawAJ6PSyqmFYC1dM1yUfYMwshFpwHNBUhFYWv71/Rv5UlQUEGgFWARXEujmmB5gP9BQKSANz4r3MeYFDDv4Pcbb4//YTKLhMyIY6DeyckHyonzLRbaA1zgSgS66PUQ0CmglM67/UdAh6VjjRYRo6zMHTpSOc5jo/GfpH3IHxMoIVoSPFAwcgpqxcgh1R2sFHYOGcK7BmOrbUgO0hXjD8CkAqB540eLZj4d9h2Aj0ZTmcMi+EEgFiA6mh/bXjSkYd9hbMUjBzYI/4xgwJBxg7MFaEMyCP9BgbCfKWBCtAd45cZpzAAkcrmsdTz3OErRRCdcK9wW7Qejac6+4Fdy9gp0bBrb+AWzQoalZc+CeA1Wbp0bn5vXf8ynAT666ffTwCoJMBGeb4CbueDK2AF9LpYVL62OKX5g3UF6NeBehCvQcE8zZb7BgrxiZdTIBAgBVpT6KiY0ADvD/CP1Dege1CoAUSAOACR4ZWG7CMaTYKlAMkABWMiZRFdXZTHCLigwWRC5gi1RGyWIrvsW3w0tFMyZ/X3KFhJygdQUeCIgKOjXg+QjXgoDjHDSmg1ALJDOgYuQLRav5BkdAADHGoC/g6kCGoR4LB5DPaamJCGgQ0GBGJByw8TOXr0Q2hzpXByzTXdGggQ2hwoQ3LabHMj7xbCCFSwSCFcAHgAuKBGD3AGCHcQuCEkQhCGjPaSEZWcQRoQvkiYQqtDYQjKZ4Qx8GEQ+4IgsUiFlAS15UQx6iE2awBSlDKwdQRiEnEQL4sQniGgwdiFCbLY7SwT/S07BAi+MbsAZ4ciEGgd9gNg9SFRTTSEEQjOBEQqpzUgLB5uQgTDA0beBo4QwArgZOABzZCHzaLW4FAWD5mQwnRXcWCEXca9C0gyeCZ0JiFlgu0wVgq8EKtPiGkfRRBOQ2PY8aVyEwAdyEjTVzxPTbYAtIckgNaRurNaI8CjfS7BdFT1iMGV/jmsXVTJMRIbpQx8CFTTeDpkXqGlVeRDWuZKEGgB4ALTQrYTQosAR+eDrXoQqYBLVTBMYNMYoAMgLpkWaH6WP2zkcBSEdQdUyD6Mgi5g6qHlAcEJxeXME/gvrQ7oAq61gxRCHQvaHzaTUY2Q2lqXHHkAOWCT5bQwM7xbCOAeQoMbvsHyG4Q/CFPgtL66AjKzqmR4JpQh6EGgdzJJg6kDWgfGI48JhCRQ1+AqQWeBPQosD7Qi5QQAWCF8gSGFbQiPwy2MwD3Q2aGxQ1iHecQJC4w+yECQi6GCXD3KlyQNgKlICGlmUyFxQ2hwWQ2HBWQqGFFgOyGozUgFP4OiHPQjGFMfUqHSaMME+QUoCn4H7QEAYgBMw2iFcw5Jwc7ZiHywnibxbfIDnRRHAiQy4IuKHKHqw2XYcAUSFNBLmFEBPxY+QNLijcYxASPEE7oPSQDKUX6EheYJa2wgEIOvWlRKPeQEheF3LbKD3I2wz+S+eE6FXQlHaxFNEI3BJDDgkKiYaQoGHaQuDAgPA0BPBCjDkcYDDU0EwAVjAADErAGzSGAGx4hZQ5Ak8nkAs4EQ+ggBEA4gEkAMgGfuQAA=="]');
+const ww$$$_namespaceObject = /*#__PURE__*/JSON.parse('["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"]');
 // EXTERNAL MODULE: ./node_modules/lz-string/libs/lz-string.js
 var lz_string = __webpack_require__(992);
 var lz_string_default = /*#__PURE__*/__webpack_require__.n(lz_string);
@@ -15715,7 +15763,7 @@ var WebWork = /*#__PURE__*/function () {
     value: function () {
       var _exec = _asyncToGenerator(/*#__PURE__*/regenerator_default().mark(function _callee(type, data, tx_keys) {
         var _this3 = this;
-        return regenerator_default().wrap(function _callee$(_context) {
+        return regenerator_default().wrap(function (_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               return _context.abrupt("return", new Promise(function (rs, rj) {
@@ -15759,7 +15807,7 @@ var WebWork = /*#__PURE__*/function () {
     value: function () {
       var _relay = _asyncToGenerator(/*#__PURE__*/regenerator_default().mark(function _callee2(event, just) {
         var _this4 = this;
-        return regenerator_default().wrap(function _callee2$(_context2) {
+        return regenerator_default().wrap(function (_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               if (just === void 0) {
@@ -15773,7 +15821,7 @@ var WebWork = /*#__PURE__*/function () {
                   };
                 }
               }));
-            case 2:
+            case 1:
             case "end":
               return _context2.stop();
           }
@@ -16091,21 +16139,21 @@ var Dataset = /*#__PURE__*/function () {
     value: function () {
       var _data = _asyncToGenerator(/*#__PURE__*/regenerator_default().mark(function _callee() {
         var ds;
-        return regenerator_default().wrap(function _callee$(_context) {
+        return regenerator_default().wrap(function (_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _context.next = 1;
               return this.dc.ww.exec('get-dataset', this.id);
-            case 2:
+            case 1:
               ds = _context.sent;
               if (ds) {
-                _context.next = 5;
+                _context.next = 2;
                 break;
               }
               return _context.abrupt("return");
-            case 5:
+            case 2:
               return _context.abrupt("return", ds.data);
-            case 6:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -17015,32 +17063,32 @@ var DCCore = /*#__PURE__*/function (_DCEvents) {
     value: function () {
       var _range_changed = _asyncToGenerator(/*#__PURE__*/regenerator_default().mark(function _callee(range, tf, check) {
         var _this2 = this;
-        var first, prom;
-        return regenerator_default().wrap(function _callee$(_context) {
+        var first, prom, _t;
+        return regenerator_default().wrap(function (_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (check === void 0) {
                 check = false;
               }
               if (this.loader) {
-                _context.next = 3;
+                _context.next = 1;
                 break;
               }
               return _context.abrupt("return");
-            case 3:
+            case 1:
               if (this.loading) {
-                _context.next = 19;
+                _context.next = 4;
                 break;
               }
               first = this.data.chart.data[0][0];
               if (!(range[0] < first)) {
-                _context.next = 19;
+                _context.next = 4;
                 break;
               }
               this.loading = true;
-              _context.next = 9;
+              _context.next = 2;
               return utils.pause(250);
-            case 9:
+            case 2:
               // Load bigger chunks
               range = range.slice(); // copy
               range[0] = Math.floor(range[0]);
@@ -17050,18 +17098,17 @@ var DCCore = /*#__PURE__*/function (_DCEvents) {
                 _this2.chunk_loaded(d);
               });
               if (!(prom && prom.then)) {
-                _context.next = 19;
+                _context.next = 4;
                 break;
               }
-              _context.t0 = this;
-              _context.next = 17;
+              _t = this;
+              _context.next = 3;
               return prom;
-            case 17:
-              _context.t1 = _context.sent;
-              _context.t0.chunk_loaded.call(_context.t0, _context.t1);
-            case 19:
+            case 3:
+              _t.chunk_loaded.call(_t, _context.sent);
+            case 4:
               if (!check) this.last_chunk = [range, tf];
-            case 20:
+            case 5:
             case "end":
               return _context.stop();
           }
