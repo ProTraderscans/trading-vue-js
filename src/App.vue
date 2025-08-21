@@ -40,7 +40,6 @@
         :indexBased="true"
         :ignoreNegativeIndex="true"
         ref="tradeRef"
-      :showTitleChartLegend="true"
     >
     </trading-vue>
   </div>
@@ -48,7 +47,7 @@
 
 <script>
 import TradingVue from "./TradingVue.vue";
-import Data from "../data/dataPER.json";
+import Data from "../data/data.json";
 import Data2 from "../test/data/data_buttons.json";
 import CodeIcon from "../test/tests/LegendButtons/code3.json";
 import DataCube from "../src/helpers/datacube.js";
