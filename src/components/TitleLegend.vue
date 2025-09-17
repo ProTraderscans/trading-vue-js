@@ -19,6 +19,7 @@
                 L<span class="t-vue-lspan">{{ ohlcv[2] }}</span>
                 C<span class="t-vue-lspan">{{ ohlcv[3] }}</span>
                 V<span class="t-vue-lspan">{{ ohlcv[4] }}</span>
+                <span class="t-vue-lspan">{{ ohlcv[5] }}</span>
             </span>
             <span v-if="!show_values" class="t-vue-lspan" :style="{ color: common.colors.text }">
                 {{ (common.meta.last || [])[4] }}
@@ -64,7 +65,10 @@ export default {
                     this.$props.values.ohlcv[4].toFixed(this.$props.values.ohlcv[4] < 1 ? 3 : 2),
                     this.$props.values.ohlcv[5] ?
                         Number(this.$props.values.ohlcv[5].toFixed(0)).toLocaleString('en-AU') :
-                        'n/a'
+                        'n/a',
+                    this.$props.values.ohlcv[8] ?
+                        '('+Number(this.$props.values.ohlcv[8].toFixed(2)).toLocaleString('en-AU')+'%)' :
+                        '',
                 ]
             } else {
                 return [
@@ -74,7 +78,10 @@ export default {
                     this.$props.values.ohlcv[4].toFixed(prec),
                     this.$props.values.ohlcv[5] ?
                         Number(this.$props.values.ohlcv[5].toFixed(0)).toLocaleString('en-AU') :
-                        'n/a'
+                        'n/a',
+                    this.$props.values.ohlcv[8] ?
+                        '('+Number(this.$props.values.ohlcv[8].toFixed(2)).toLocaleString('en-AU')+'%)' :
+                        '',
                 ]
             }
         },
