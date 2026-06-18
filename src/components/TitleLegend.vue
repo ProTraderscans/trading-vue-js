@@ -2,7 +2,7 @@
     <div class="trading-vue-legend title-legend" >
         <div v-if="(grid_id === 0)" class="trading-vue-ohlcv"
             >
-            <template v-if="common?.showLegendPropsData && common.showLegendPropsData.length">
+            <template v-if="common && common.showLegendPropsData && common.showLegendPropsData.length">
                 <b v-for="(n, i) in common.showLegendPropsData" :key="i">{{ n.k }} : {{ n.v }}&nbsp;</b><br />
             </template>
             <template v-if="show_CustomProps"><span v-for="(n, i) in legendTxtConfig" :key="i"

@@ -3,7 +3,7 @@
 
         <div v-if="(grid_id === 0 && !showTitleChartLegend)" class="trading-vue-ohlcv"
             :style="{ 'max-width': common.width + 'px' }">
-            <template v-if="common?.showLegendPropsData && common.showLegendPropsData.length">
+            <template v-if="common && common.showLegendPropsData && common.showLegendPropsData.length">
                 <b v-for="(n, i) in common.showLegendPropsData" :key="i">{{ n.k }} : {{ n.v }}&nbsp;</b><br />
             </template>
             <template v-if="show_CustomProps"><span v-for="(n, i) in legendTxtConfig" :key="i" :style="n.style">{{

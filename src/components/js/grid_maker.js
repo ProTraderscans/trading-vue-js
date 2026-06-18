@@ -86,7 +86,7 @@ function GridMaker(id, params, master_grid = null) {
 
     function calc_sidebar() {
 
-        if (sub.length < 2) {
+        if (sub.length < 1) {
             self.prec = 0
             self.sb = $p.config.SBMIN
             return
@@ -170,7 +170,7 @@ function GridMaker(id, params, master_grid = null) {
 
     function calc_positions() {
 
-        if (sub.length < 2) return
+        if (sub.length < 1) return
 
         let dt = range[1] - range[0]
 

@@ -502,7 +502,7 @@ export default class Grid {
     // the chart continues to scale down a little.
     // Solution: I don't know yet
 
-    if (!this.range.length || this.data.length < 2) return;
+    if (!this.range.length || this.data.length < 1) return;
 
     let l = this.data.length - 1;
     let data = this.data;

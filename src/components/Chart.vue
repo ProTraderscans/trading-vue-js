@@ -350,8 +350,12 @@ export default {
     calc_interval(caller) {
 
       let tf = Utils.parse_tf(this.forced_tf)
-      if (this.ohlcv.length < 2 && !tf) return
-      this.interval_ms = tf || Utils.detect_interval(this.ohlcv)
+      if (this.ohlcv.length < 1) return
+      let detected = Utils.detect_interval(this.ohlcv)
+      if (!isFinite(detected) || detected === 0) {
+        detected = tf || Const.DAY
+      }
+      this.interval_ms = tf || detected
       this.interval = this.$props.ib ? 1 : this.interval_ms
       // console.log("calc_interval", {
       //   interval: this.interval,
@@ -380,8 +384,10 @@ export default {
       const ml = this.$props.config.MINIMUM_LEN + 0.5
       const l = this.ohlcv.length - 1
 
-      if (this.ohlcv.length < 2) return
-      if (this.ohlcv.length <= dl) {
+      if (this.ohlcv.length < 1) return
+      if (this.ohlcv.length === 1) {
+        var s = 0, d = ml
+      } else if (this.ohlcv.length <= dl) {
         var s = 0, d = ml
       } else {
         s = l - dl, d = 0.5
