@@ -299,8 +299,8 @@ export default {
       if (manualInteraction) {
       }
       // console.log('this.range before update',this.range)
-      Utils.overwrite(this.range, r)
       Utils.overwrite(this.sub, sub)
+      Utils.overwrite(this.range, r)
       this.update_layout()
       // console.log('this.range after update',this.sub.length,r,this.range)
       // console.log('range_changes_working',this.ignoreNegativeIndex)
