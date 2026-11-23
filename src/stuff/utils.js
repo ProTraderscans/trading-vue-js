@@ -2,6 +2,17 @@
 import IndexedArray from 'arrayslicer'
 import Const from './constants.js'
 
+// Patch arrayslicer bug where index 0 is falsy (0 || null evaluates to null)
+IndexedArray.prototype.getRange = function (begin, end) {
+    if (this.compare(begin, end) === 1) return []
+    this.fetch(begin)
+    var start = this.cursor !== null && this.cursor !== undefined ? this.cursor : this.nexthigh
+    this.fetch(end)
+    var finish = this.cursor !== null && this.cursor !== undefined ? this.cursor : this.nextlow
+    if (start === null || finish === null) return []
+    return this.data.slice(start, finish + 1)
+}
+
 export default {
 
     clamp(num, min, max) {
@@ -36,12 +47,12 @@ export default {
     },
 
     get_year(t) {
-        if (!t) return undefined
+        if (t === undefined || t === null || isNaN(t)) return undefined
         return new Date(t).getUTCFullYear()
     },
 
     get_month(t) {
-        if (!t) return undefined
+        if (t === undefined || t === null || isNaN(t)) return undefined
         return new Date(t).getUTCMonth()
     },
 
@@ -126,7 +137,8 @@ export default {
         try {
             let ia = new IndexedArray(arr, '0')
             let res = ia.getRange(t1, t2)
-            let i0 = ia.valpos[t1].next
+            let i0 = ia.valpos[t1] ? ia.valpos[t1].next : 0
+            if (i0 === undefined || i0 === null) i0 = 0
             return [res, i0]
         } catch(e) {
             // Something wrong with fancy slice lib

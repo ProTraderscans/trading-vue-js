@@ -42,7 +42,7 @@ module.exports = {
      * @returns {Number} 1 if a > b, 0 if a = b, -1 if a < b
      */
     numcmp: function (a, b) {
-        return a - b;
+        return a < b ? -1 : a > b ? 1 : 0;
     },
 
     /**
@@ -268,11 +268,11 @@ IndexedArray.prototype.getRange = function (begin, end) {
 
     // fetch start and default to the next index above
     this.fetch(begin);
-    var start = this.cursor || this.nexthigh;
+    var start = this.cursor !== null && this.cursor !== undefined ? this.cursor : this.nexthigh;
 
     // fetch finish and default to the next index below
     this.fetch(end);
-    var finish = this.cursor || this.nextlow;
+    var finish = this.cursor !== null && this.cursor !== undefined ? this.cursor : this.nextlow;
 
     // if any boundary is not set, return no range
     if (start === null || finish === null) {
@@ -857,11 +857,11 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     return Date.UTC(new Date(t).getFullYear());
   },
   get_year: function get_year(t) {
-    if (!t) return undefined;
+    if (t === undefined || t === null || isNaN(t)) return undefined;
     return new Date(t).getUTCFullYear();
   },
   get_month: function get_month(t) {
-    if (!t) return undefined;
+    if (t === undefined || t === null || isNaN(t)) return undefined;
     return new Date(t).getUTCMonth();
   },
   // Nearest in array
@@ -945,7 +945,8 @@ var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
     try {
       var ia = new (lib_default())(arr, '0');
       var res = ia.getRange(t1, t2);
-      var i0 = ia.valpos[t1].next;
+      var i0 = ia.valpos[t1] ? ia.valpos[t1].next : 0;
+      if (i0 === undefined || i0 === null) i0 = 0;
       return [res, i0];
     } catch (e) {
       // Something wrong with fancy slice lib
@@ -9522,6 +9523,8 @@ var TI = /*#__PURE__*/function () {
     classCallCheck_classCallCheck(this, TI);
 
     this.ib = false;
+    this.ti_map = {};
+    this.it_map = {};
   }
 
   createClass_createClass(TI, [{
@@ -9534,8 +9537,8 @@ var TI = /*#__PURE__*/function () {
           interval_ms = params.interval_ms,
           sub_start = params.sub_start,
           ib = params.ib;
-      this.ti_map = [];
-      this.it_map = [];
+      this.ti_map = {};
+      this.it_map = {};
       this.sub_i = [];
       this.ib = ib;
       this.sub = res;
@@ -9716,7 +9719,7 @@ var TI = /*#__PURE__*/function () {
   }, {
     key: "smth2i",
     value: function smth2i(smth) {
-      if (smth > MAX_ARR) {
+      if (Math.abs(smth) > MAX_ARR) {
         return this.t2i(smth); // it was time
       } else {
           return smth; // it was an index
@@ -9725,10 +9728,10 @@ var TI = /*#__PURE__*/function () {
   }, {
     key: "smth2t",
     value: function smth2t(smth) {
-      if (smth < MAX_ARR) {
-        return this.i2t(smth); // it was an index
+      if (Math.abs(smth) > MAX_ARR) {
+        return smth; // it was time
       } else {
-          return smth; // it was time
+          return this.i2t(smth); // it was an index
         }
     } // Global Time => Index (uses all data, approx. method)
     // Used by tv.goto()
@@ -9736,7 +9739,7 @@ var TI = /*#__PURE__*/function () {
   }, {
     key: "gt2i",
     value: function gt2i(smth, ohlcv) {
-      if (smth > MAX_ARR) {
+      if (Math.abs(smth) > MAX_ARR) {
         var E = 0.1; // Fixes the arrayslicer bug
 
         var _Utils$fast_nearest = utils.fast_nearest(ohlcv, smth + E),
@@ -10067,8 +10070,8 @@ var TI = /*#__PURE__*/function () {
       if (manualInteraction) {} // console.log('this.range before update',this.range)
 
 
-      utils.overwrite(this.range, r);
       utils.overwrite(this.sub, sub);
+      utils.overwrite(this.range, r);
       this.update_layout(); // console.log('this.range after update',this.sub.length,r,this.range)
       // console.log('range_changes_working',this.ignoreNegativeIndex)
 
